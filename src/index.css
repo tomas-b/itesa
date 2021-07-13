@@ -2,9 +2,48 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-body {
-  background: #DDD;
-  color: #333;
+:root {
+
+  --auth-bg: #6e8afa;
+  --auth-cl: #fff;
+  --auth-btn-bg: #6e8afa;
+  --auth-btn-cl: #fff;
+
+  --menu-bg: #6e8afa;
+  --menu-cl: #fff;
+
+  --main-bg: #fff;
+  --main-cl: #0d1333;
+  --main-cl-alt: #6e7595;
+
+  --main-input-bg: #f5f5f7;
+  --main-input-cl: #6b7192;
+  --main-input-ico: #404870;
+
+  --main-menu: #737373;
+
+  --main-card-bg: #fff; 
+  --main-card-cl: #000; 
+  --main-card-alt: #6e8afa; 
+
+  --main-btn-bg: #5c5b5a;
+  --main-btn-cl: #fff; 
+
+  --main-nav-cl: #605a65;
+  --main-nav-cl-active: #fff;
+  --main-nav-bg-active: #6e8afa;
+
+  --timer-bg: #8da3fb;
+  --timer-cl: #fff;
+  --timer-card-bg: #fff;
+  --timer-card-cl: #0d1333;
+  --timer-card-inactive-cl: #8f929b;
+  --timer-card-inactive-line: #eeeef0;
+
+  --timer-btn-bg: #6e8afa;
+  --timer-btn-cl: #fff;
+
 }

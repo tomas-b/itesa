@@ -16,7 +16,7 @@ const LogIn = () => {
     base
 			.auth()
 			.signInWithEmailAndPassword(form.email, form.password)
-      .then(res=>console.log(res))
+      .then(res=>console.error(res))
       .catch(res=>console.error(res))
   };
 

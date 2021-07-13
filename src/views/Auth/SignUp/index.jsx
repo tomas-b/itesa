@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 import base from "./../../../base";
+import S from './styles.module.css'
 
 const SingUp = () => {
   let [form, setForm] = useState({
@@ -24,6 +26,10 @@ const SingUp = () => {
   };
 
   return (
+    <div className={S.container}>
+    <div className={S.h1_wrapper}>
+      <h1>register</h1>
+    </div>
     <form onSubmit={formSubmit}>
       <input name="name" placeholder="nombre y apellido" onChange={inputChange} />
       <input name="email" placeholder="email" onChange={inputChange} />
@@ -39,6 +45,7 @@ const SingUp = () => {
         <option value='M'>MUJER</option>
         <option value='O'>OTRO</option>
       </select>
+      <div className={S.ToS_wrapper}>
       <input type="checkbox" name="ToS" />
       <label for="ToS">
         Acepto la 
@@ -47,8 +54,13 @@ const SingUp = () => {
         <a href="#">terminos y condiciones de uso</a>
         y Activaciones de Marketing.
       </label>
-      <input type="submit" />
+      </div>
+      <input type="submit" value='registrarme'/>
+      <div>
+			¿Ya tenés cuenta? <Link to='/singup'>Inicia Sesión</Link>
+      </div>
     </form>
+    </div>
   );
 };
 
