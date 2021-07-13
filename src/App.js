@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useContext } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import base from "./base";
+import { AuthProvider, AuthContext } from "./Auth";
+import SingUp from "./views/Auth/SignUp";
+import LogIn from "./views/Auth/LogIn";
+import PrivateRoute from './PrivateRoute';
 
-function App() {
+const App = () => {
   return (
-    <h1>ITESA</h1>
+    <AuthProvider>
+      <BrowserRouter>
+        <PrivateRoute exact path="/" component={Home} />
+        <Route exact path="/login" component={LogIn} />
+        <Route exact path="/singup" component={SingUp} />
+      </BrowserRouter>
+    </AuthProvider>
   );
-}
+};
+
+const Home = () => {
+  const user = useContext(AuthContext).currentUser;
+  return (
+    <>
+      <h1>home, {user.email}!</h1>
+      <button onClick={() => base.auth().signOut()}>logout</button>
+    </>
+  );
+};
 
 export default App;
