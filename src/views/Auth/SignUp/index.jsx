@@ -8,6 +8,7 @@ const SingUp = () => {
     name: "",
     email: "",
     password: "",
+    ToS: "",
   });
 
   const formSubmit = (e) => {
@@ -22,7 +23,9 @@ const SingUp = () => {
 
   const inputChange = (e) => {
     let { name, value } = e.target;
+    if(e.target.type === 'checkbox') value = e.target.checked
     setForm({ ...form, [name]: value });
+    console.log(form)
   };
 
   return (
@@ -46,8 +49,8 @@ const SingUp = () => {
         <option value='O'>OTRO</option>
       </select>
       <div className={S.ToS_wrapper}>
-      <input type="checkbox" name="ToS" />
-      <label for="ToS">
+      <input type="checkbox" name="ToS" onChange={inputChange}/>
+      <label htmlFor="ToS">
         Acepto la 
         <a href="#">política de privacidad</a>
         y los 

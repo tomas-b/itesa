@@ -54,6 +54,10 @@
 	padding: 10px;
 }
 
+.container form input:checked {
+	background: var(--auth-cl)
+}
+
 .container div {
 	margin: 4%;
 	font-size: .8em;
