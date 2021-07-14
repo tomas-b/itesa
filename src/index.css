@@ -2,11 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  height: -webkit-fill-available;
 }
 
 :root {
-
   --auth-bg: #6e8afa;
   --auth-cl: #fff;
   --auth-btn-bg: #fff;
@@ -20,17 +24,17 @@
   --main-cl-alt: #6e7595;
 
   --main-input-bg: #f5f5f7;
-  --main-input-cl: #6b7192;
-  --main-input-ico: #404870;
+  --main-input-cl: #404870;
+  --main-input-ph: #6b7192;
 
   --main-menu: #737373;
 
-  --main-card-bg: #fff; 
-  --main-card-cl: #000; 
-  --main-card-alt: #6e8afa; 
+  --main-card-bg: #fff;
+  --main-card-cl: #000;
+  --main-card-alt: #6e8afa;
 
   --main-btn-bg: #5c5b5a;
-  --main-btn-cl: #fff; 
+  --main-btn-cl: #fff;
 
   --main-nav-cl: #605a65;
   --main-nav-cl-active: #fff;
@@ -45,5 +49,4 @@
 
   --reps-btn-bg: #6e8afa;
   --reps-btn-cl: #fff;
-
 }
