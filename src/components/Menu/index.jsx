@@ -41,7 +41,7 @@ const Menu = () => {
             <Link to="/">MI PERFIL</Link>
           </li>
         </ul>
-        <div class={S.logout_wrapper}>
+        <div className={S.logout_wrapper}>
         <button onClick={() => base.auth().signOut()}>CERRAR SESION</button>
         </div>
       </div>
