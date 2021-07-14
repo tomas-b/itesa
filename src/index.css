@@ -9,8 +9,8 @@
 
   --auth-bg: #6e8afa;
   --auth-cl: #fff;
-  --auth-btn-bg: #6e8afa;
-  --auth-btn-cl: #fff;
+  --auth-btn-bg: #fff;
+  --auth-btn-cl: #6e8afa;
 
   --menu-bg: #6e8afa;
   --menu-cl: #fff;
@@ -36,14 +36,14 @@
   --main-nav-cl-active: #fff;
   --main-nav-bg-active: #6e8afa;
 
-  --timer-bg: #8da3fb;
-  --timer-cl: #fff;
-  --timer-card-bg: #fff;
-  --timer-card-cl: #0d1333;
-  --timer-card-inactive-cl: #8f929b;
-  --timer-card-inactive-line: #eeeef0;
+  --reps-bg: #8da3fb;
+  --reps-cl: #fff;
+  --reps-card-bg: #fff;
+  --reps-card-cl: #0d1333;
+  --reps-card-inactive-cl: #8f929b;
+  --reps-card-inactive-line: #eeeef0;
 
-  --timer-btn-bg: #6e8afa;
-  --timer-btn-cl: #fff;
+  --reps-btn-bg: #6e8afa;
+  --reps-btn-cl: #fff;
 
 }

@@ -9,14 +9,19 @@
 	overflow: hidden;
 	text-align: center;
 	display: grid;	
-	grid-template-rows: 1fr max-content;
+	grid-template-rows: minmax(min-content, 200px) max-content;
 }
 
 .container form {
-	max-width: 500px;
+	width: 100vw;
+	max-width: 600px;
 	margin:0 auto;
 	display: flex;
 	flex-direction: column;
+}
+
+.container form input::placeholder {
+	color: var(--auth-cl)
 }
 
 .container form select {
@@ -26,6 +31,8 @@
 	color: var(--auth-cl);
 	border: 1px solid var(--auth-cl);
 	text-transform: uppercase;
+	-webkit-appearance: none;
+	border-radius: 0;
 }
 
 .container form input {
@@ -34,17 +41,38 @@
 	background: var(--auth-bg);
 	color: var(--auth-cl);
 	border: 1px solid var(--auth-cl);
-	text-transform: uppercase;
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
+.container form input[type='submit'] {
+	background: var(--auth-btn-bg);
+	color: var(--auth-btn-cl);
+}
+
+.container form input[type='checkbox'] {
+	margin: .4em 1em;
+	padding: 10px;
+}
+
+.container form input:checked {
+	background: var(--auth-cl)
 }
 
 .container div {
 	margin: 4%;
+	font-size: .8em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: left;
 }
 
 .h1_wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-transform: uppercase;
 }
 
 .container a {
