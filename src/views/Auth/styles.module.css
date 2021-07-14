@@ -8,11 +8,12 @@
 	overflow: hidden;
 	text-align: center;
 	display: grid;	
-	grid-template-rows: minmax(1fr, 450px) max-content;
+	grid-template-rows: minmax(min-content, 200px) max-content;
 }
 
 .container form {
-	max-width: 500px;
+	width: 100vw;
+	max-width: 600px;
 	margin:0 auto;
 	display: flex;
 	flex-direction: column;

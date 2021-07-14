@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import base from "./../../../base";
-import S from './styles.module.css'
+import S from '../styles.module.css'
 
 const SingUp = () => {
   let [form, setForm] = useState({
@@ -60,7 +60,7 @@ const SingUp = () => {
       </div>
       <input type="submit" value='registrarme'/>
       <div>
-			¿Ya tenés cuenta? <Link to='/singup'>Inicia Sesión</Link>
+			¿Ya tenés cuenta? <Link to='/login'>Inicia Sesión</Link>
       </div>
     </form>
     </div>
