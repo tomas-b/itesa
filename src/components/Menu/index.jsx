@@ -1,5 +1,6 @@
 import React from 'react'
 import { atom, useRecoilState } from 'recoil'
+import S from './styles.module.css'
 
 const showMenuState = atom({
 	key: 'showMenu',
@@ -8,7 +9,11 @@ const showMenuState = atom({
 
 const Menu = () => {
 	let [showMenu, setShowMenu] = useRecoilState(showMenuState)
-	return showMenu && <h1>sup?</h1>
+	return showMenu && (
+	<div className={S.menu_container}>
+		<h1>Menu</h1>
+		<ToggleBtn/>		
+	</div>)
 }
 
 export const ToggleBtn = () => {

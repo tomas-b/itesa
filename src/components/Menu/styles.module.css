@@ -1,0 +1,7 @@
+.menu_container {
+	/* position: absolute;
+	inset: 0; */
+	height: 300px;
+	background:var(--menu-bg);
+	color:var(--menu-cl)
+}
