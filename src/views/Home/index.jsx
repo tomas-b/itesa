@@ -3,9 +3,9 @@ import { AuthContext } from "../../Auth";
 import base from "../../base";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
+import Search from "../../components/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-
 import s from "./style.module.css";
 
 const Home = () => {
@@ -31,13 +31,13 @@ const Home = () => {
     <>
       <Menu />
       <div className={s.grid_wrapper}>
-        <Header className={s.header}/>
+        <Header className={s.header} />
         <div className={s.welcome}>
           <h2>Hola {user.displayName},</h2>
           <h3>Elegí tu ejercicio de hoy</h3>
         </div>
         <div className={s.search}>
-          <input type="text" placeholder="Buscá tu ejercicio" />
+          <Search />
         </div>
         <div className={s.title}>
           <h3>Qué músculo querés trabajar hoy?</h3>

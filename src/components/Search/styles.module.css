@@ -1,0 +1,20 @@
+.search_wrapper svg {
+  position: relative;
+  left: 30px;
+  color: var(--main-input-cl);
+  z-index: 2;
+}
+
+.search_wrapper input {
+  padding: 10px;
+  padding-left: 40px;
+  border-radius: 10px;
+  background: var(--main-input-bg);
+  color: var(--main-input-cl);
+  border: none;
+  max-width: 90%;
+}
+
+.search_wrapper input::placeholder {
+  color: var(--main-input-ph);
+}
