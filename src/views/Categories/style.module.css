@@ -1,9 +1,9 @@
 .grid {
-    display: grid;
+    /* display: grid;
     margin: 30px;
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 25px;
+    gap: 25px; */
     grid-area: cards;
   }
   

@@ -14,7 +14,7 @@ const Card = () => {
           <li>Una mancuerna</li>
         </ul>
       </div>
-      <a href="#" className={s.btn}>
+      <a href="https://www.youtube.com/watch?v=iGYeHsgb4CY&ab_channel=ATHLEAN-X%E2%84%A2" className={s.btn}>
         Turorial
       </a>
     </div>

@@ -21,6 +21,8 @@ const Categories = () => {
         </div>
         <div className={s.grid}>
           <Card />
+          <Card />
+          <Card />
         </div>
       </div>
     </>
