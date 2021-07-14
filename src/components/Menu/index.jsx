@@ -18,18 +18,11 @@ const Menu = () => {
   });
 
   return (
-    showMenu && (
-      <a.div className={S.menu_container} style={animation}>
-        <h1>Menu</h1>
-        <button onClick={() => setShowMenu(false)}>hide</button>
-      </a.div>
-    )
+    <a.div className={S.menu_container} style={animation}>
+      <h1>Menu</h1>
+      <button onClick={() => setShowMenu(false)}>hide</button>
+    </a.div>
   );
 };
-
-// export const ToggleBtn = () => {
-// 	let [showMenu, setShowMenu] = useRecoilState(showMenuState)
-// 	return <button onClick={()=>setShowMenu(!showMenu)}>{showMenu ? 'hide' : 'show'}</button>
-// }
 
 export default Menu;
