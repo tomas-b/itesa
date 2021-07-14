@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Auth";
 import base from "../../base";
 import Menu from "../../components/Menu";
@@ -27,6 +28,9 @@ const Home = () => {
       .then((res) => setGender(res.data().gender));
   }, []);
 
+  // let categories = ["Biceps", "Piernas", "Abdominales", "Pecho"];
+  let categories = [{name: "Biceps", imgUrl: "url"}, {name: "Piernas", imgUrl: "url"}, {name: "Abdominales", imgUrl: "url"}, {name: "Pecho", imgUrl: "url"} ];
+
   return (
     <>
       <Menu />
@@ -43,22 +47,17 @@ const Home = () => {
           <h3>Qué músculo querés trabajar hoy?</h3>
         </div>
         <div className={s.grid}>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
+          {categories.map((category, index) => {
+            return (
+              <div key={index} className={s.card}>
+                <Link to={`/categories/${category.name}`}>
+                  <div className={s.card}>
+                  </div>
+                </Link>
+                <h4>{category.name}</h4>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
