@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import React from "react";
-import { Link } from "react-router-dom";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
+import Card from "../../components/Card"
 
 import s from "./style.module.css";
 
@@ -20,6 +20,7 @@ const Categories = () => {
           <input type="text" placeholder="Buscá tu ejercicio" />
         </div>
         <div className={s.grid}>
+          <Card />
         </div>
       </div>
     </>
