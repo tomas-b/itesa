@@ -40,7 +40,6 @@
 	background: var(--auth-bg);
 	color: var(--auth-cl);
 	border: 1px solid var(--auth-cl);
-	text-transform: uppercase;
 	-webkit-appearance: none;
 	border-radius: 0;
 }

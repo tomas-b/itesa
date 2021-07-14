@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import base from "./../../../base";
 import S from '../styles.module.css'
 
 const SingUp = () => {
+
+  let history = useHistory()
+
   let [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,7 +21,13 @@ const SingUp = () => {
     base
       .auth()
       .createUserWithEmailAndPassword(form.email, form.password)
-      .then((res) => console.log(res))
+      .then(({user}) => {
+        user.updateProfile({
+          displayName: form.name
+        })
+        .then(()=>history.push('/'))
+        .catch((res) => console.error(res));
+      })
       .catch((res) => console.error(res));
   };
 
@@ -34,17 +43,17 @@ const SingUp = () => {
       <h1>REGISTRATE</h1>
     </div>
     <form onSubmit={formSubmit}>
-      <input name="name" placeholder="nombre y apellido" onChange={inputChange} required/>
-      <input name="email" placeholder="email" onChange={inputChange} required/>
+      <input name="name" placeholder="NOMBRE Y APELLIDO" onChange={inputChange} required/>
+      <input name="email" placeholder="EMAIL" onChange={inputChange} required/>
       <input
         name="password"
         type="password"
-        placeholder="contraseña"
+        placeholder="CONTRASEÑA"
         onChange={inputChange}
         required
       />
       <select name="gender" required onChange={inputChange}>
-        <option value=''>sexo</option>
+        <option value=''>SEXO</option>
         <option value='M'>HOMBRE</option>
         <option value='F'>MUJER</option>
       </select>
@@ -58,7 +67,7 @@ const SingUp = () => {
         y Activaciones de Marketing.
       </label>
       </div>
-      <input type="submit" value='registrarme'/>
+      <input type="submit" value='REGISTRARME'/>
       <div>
 			¿Ya tenés cuenta? <Link to='/login'>Inicia Sesión</Link>
       </div>
