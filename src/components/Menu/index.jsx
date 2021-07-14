@@ -23,7 +23,7 @@ const Menu = () => {
 
   return (
     <a.div className={S.menu_wrapper} style={animation}>
-      <div className={S.menu_container} >
+      <div className={S.menu_container}>
         <div className={S.close} onClick={() => setShowMenu(false)}>
           <FontAwesomeIcon icon={faTimes} />
         </div>
@@ -42,7 +42,7 @@ const Menu = () => {
           </li>
         </ul>
         <div className={S.logout_wrapper}>
-        <button onClick={() => base.auth().signOut()}>CERRAR SESION</button>
+          <button onClick={() => base.auth().signOut()}>CERRAR SESION</button>
         </div>
       </div>
     </a.div>
