@@ -28,7 +28,7 @@ const SingUp = () => {
   return (
     <div className={S.container}>
     <div className={S.h1_wrapper}>
-      <h1>register</h1>
+      <h1>REGISTRATE</h1>
     </div>
     <form onSubmit={formSubmit}>
       <input name="name" placeholder="nombre y apellido" onChange={inputChange} />
