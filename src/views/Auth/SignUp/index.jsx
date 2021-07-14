@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import base from "./../../../base";
-import S from './styles.module.css'
+import S from '../styles.module.css'
 
 const SingUp = () => {
+
+  let history = useHistory()
+
   let [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
+    ToS: "",
+    gender: "",
   });
 
   const formSubmit = (e) => {
@@ -16,38 +21,45 @@ const SingUp = () => {
     base
       .auth()
       .createUserWithEmailAndPassword(form.email, form.password)
-      .then((res) => console.log(res))
+      .then(({user}) => {
+        user.updateProfile({
+          displayName: form.name
+        })
+        .then(()=>history.push('/'))
+        .catch((res) => console.error(res));
+      })
       .catch((res) => console.error(res));
   };
 
   const inputChange = (e) => {
     let { name, value } = e.target;
+    if(e.target.type === 'checkbox') value = e.target.checked
     setForm({ ...form, [name]: value });
   };
 
   return (
     <div className={S.container}>
     <div className={S.h1_wrapper}>
-      <h1>register</h1>
+      <h1>REGISTRATE</h1>
     </div>
     <form onSubmit={formSubmit}>
-      <input name="name" placeholder="nombre y apellido" onChange={inputChange} />
-      <input name="email" placeholder="email" onChange={inputChange} />
+      <input name="name" placeholder="NOMBRE Y APELLIDO" onChange={inputChange} required/>
+      <input name="email" placeholder="EMAIL" onChange={inputChange} required/>
       <input
         name="password"
         type="password"
-        placeholder="contraseña"
+        placeholder="CONTRASEÑA"
         onChange={inputChange}
+        required
       />
-      <select name="sex">
-        <option value=''>sexo</option>
-        <option value='H'>HOMBRE</option>
-        <option value='M'>MUJER</option>
-        <option value='O'>OTRO</option>
+      <select name="gender" required onChange={inputChange}>
+        <option value=''>SEXO</option>
+        <option value='M'>HOMBRE</option>
+        <option value='F'>MUJER</option>
       </select>
       <div className={S.ToS_wrapper}>
-      <input type="checkbox" name="ToS" />
-      <label for="ToS">
+      <input type="checkbox" name="ToS" onChange={inputChange} required/>
+      <label htmlFor="ToS">
         Acepto la 
         <a href="#">política de privacidad</a>
         y los 
@@ -55,9 +67,9 @@ const SingUp = () => {
         y Activaciones de Marketing.
       </label>
       </div>
-      <input type="submit" value='registrarme'/>
+      <input type="submit" value='REGISTRARME'/>
       <div>
-			¿Ya tenés cuenta? <Link to='/singup'>Inicia Sesión</Link>
+			¿Ya tenés cuenta? <Link to='/login'>Inicia Sesión</Link>
       </div>
     </form>
     </div>

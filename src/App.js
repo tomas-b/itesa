@@ -22,7 +22,7 @@ const Home = () => {
   const user = useContext(AuthContext).currentUser;
   return (
     <>
-      <h1>home, {user.email}!</h1>
+      <h1>hi, {user.displayName}!</h1>
       <button onClick={() => base.auth().signOut()}>logout</button>
     </>
   );
