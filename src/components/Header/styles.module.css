@@ -1,0 +1,17 @@
+.icon {
+  color: var(--main-menu);
+	font-size: 2em;
+}
+
+.avatar {
+	width: 40px;
+	height: 40px;
+	float:right
+}
+
+.header {
+	background: red;
+	margin: 1em;
+	display: flex;
+	justify-content: center;
+}

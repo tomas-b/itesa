@@ -1,9 +1,10 @@
 .grid {
   display: grid;
-  margin: 10px;
+  margin: 30px;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 25px;
+  grid-area: cards;
 }
 
 .card {
@@ -20,11 +21,47 @@
   height: 100%;
   border-radius: 20px;
 }
-
-.icon {
-  color: var(--main-menu);
-}
-
 .icon:hover {
   cursor: pointer;
+}
+
+.grid_wrapper {
+  display: grid; 
+  grid-template-rows: max-content max-content 1fr 1fr max-content; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "header"
+    "welcome"
+    "search"
+    "title"
+    "cards"; 
+  height: 100vh;
+}
+
+.header { grid-area: header; }
+.welcome {
+  grid-area: welcome;
+  margin: 1em;
+}
+.welcome h2 {
+  color: var(--main-cl)
+
+}
+.welcome h3 {
+  color: var(--main-cl-alt);
+}
+
+.search {
+  grid-area: search;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  grid-area: title;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:1em;
 }
