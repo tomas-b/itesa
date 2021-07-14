@@ -30,7 +30,6 @@ const Home = () => {
 			<Menu/>
       <h1>hi, {user.displayName}!</h1>
       <h2> {gender} </h2>
-      <button onClick={() => base.auth().signOut()}>logout</button>
       <button onClick={() => setShowMenu(true)}>show</button>
     </>
   );
