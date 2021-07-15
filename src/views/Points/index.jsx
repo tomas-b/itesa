@@ -1,9 +1,41 @@
-import React from "react"
+import React, { useState } from "react";
+import "mind-ar";
+import MindArViewer from "../../components/MindArViewer";
+import s from "./style.module.css";
 
 const Points = () => {
-    return (
-        <div>Sumar Puntos</div>
-    )
-}
+  const [started, setStarted] = useState(false);
+  return (
+    <div className={s.App}>
+      <div>
+        {!started && (
+          <button
+            onClick={() => {
+              setStarted(true);
+            }}
+          >
+            Start
+          </button>
+        )}
+        {started && (
+          <button
+            onClick={() => {
+              setStarted(false);
+            }}
+          >
+            Stop
+          </button>
+        )}
+      </div>
 
-export default Points
+      {started && (
+        <div className={s.container}>
+          <MindArViewer />
+          <video></video>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Points;
