@@ -8,6 +8,25 @@ import s from "./style.module.css";
 
 const Categories = () => {
   let {name} = useParams()
+
+  let exercises = [
+    {
+      name: 'Bicep curl',
+      needs: ['1 mancuerna'],
+      image: 'https://cdn.discordapp.com/attachments/864138362306953229/864917391837626398/unknown.png'
+    },
+    {
+      name: 'Bicep curl',
+      needs: ['1 mancuerna'],
+      image: 'https://cdn.discordapp.com/attachments/864138362306953229/864917391837626398/unknown.png'
+    },
+    {
+      name: 'Bicep curl',
+      needs: ['1 mancuerna'],
+      image: 'https://cdn.discordapp.com/attachments/864138362306953229/864917391837626398/unknown.png'
+    },
+  ]
+
   return (
     <>
       <Menu />
@@ -21,18 +40,11 @@ const Categories = () => {
         </div>
         <div className={s.grid}>
         <div className={s.carroussel}>
+          {exercises.map(exercise => 
           <div className={s.item}>
-            <h3>sarasa</h3>
+            <Card {...exercise}/>
           </div>
-          <div className={s.item}>
-            <h3>sarasa</h3>
-          </div>
-          <div className={s.item}>
-            <h3>sarasa</h3>
-          </div>
-          <div className={s.item}>
-            <h3>sarasa</h3>
-          </div>
+          )}
         </div>
         </div>
       </div>

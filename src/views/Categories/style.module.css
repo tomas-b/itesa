@@ -78,7 +78,7 @@
   display: flex;
   overflow-y: scroll;
   scroll-snap-type: both mandatory;
-  background: red;
+  /* background:blue; */
 }
 
 .item {
@@ -87,7 +87,7 @@
   margin: 4%;
   flex-shrink: 0;
   scroll-snap-align: center;
-  background: blue;
+  /* background:red; */
 }
 
 

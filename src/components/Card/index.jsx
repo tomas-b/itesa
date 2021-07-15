@@ -1,22 +1,23 @@
 import React from "react";
 import s from "./style.module.css"
 
-const Card = () => {
+const Card = ({name, needs, image}) => {
   return (
     <div className={s.card}>
-      <div className={s.title}>Biseps curl</div>
-      <div className={s.icon}>
-        <img src="https://cdn.discordapp.com/attachments/864138362306953229/864917391837626398/unknown.png" />
+      <div className={s.title}>{name}</div>
+      <div className={s.image} style={{backgroundImage: `url('${image}')`}}>
       </div>
       <div className={s.features}>
         <ul>
           <li>Necesitas...</li>
-          <li>Una mancuerna</li>
+          {needs.map(need=><li>{need}</li>)}
         </ul>
       </div>
+      <div className={s.btn_wrapper}>
       <a href="https://www.youtube.com/watch?v=iGYeHsgb4CY&ab_channel=ATHLEAN-X%E2%84%A2" className={s.btn}>
-        Turorial
+        Tutorial
       </a>
+      </div>
     </div>
   );
 
