@@ -1,9 +1,4 @@
 .grid {
-  display: grid;
-  margin: 10px 30px;
-  align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 25px;
   grid-area: cards;
 }
 
@@ -29,8 +24,8 @@
   gap: 0px 0px;
   grid-template-areas:
     "header"
-    "welcome"
     "search"
+    "welcome"
     "title"
     "cards";
   height: 100vh;
@@ -71,4 +66,34 @@
   .grid_wrapper {
     width: 60%;
   }
+}
+
+/*******************/
+.grid_wrapper {
+  grid-template-rows: min-content min-content min-content min-content 1fr;
+}
+
+.carroussel {
+  height: 90%;
+  display: flex;
+  overflow-y: scroll;
+  scroll-snap-type: both mandatory;
+  /* background:blue; */
+}
+
+.item {
+  width: 80%;
+  height: 90%;
+  margin: 4%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  /* background:red; */
+}
+
+
+.item:first-child {
+  margin-left: 15%;
+}
+.item:last-child {
+  margin-right: 15%;
 }
