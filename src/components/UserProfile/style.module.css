@@ -5,40 +5,53 @@
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "avatar name"
-    "info info";
-  background-color: lightcyan;
+    "avatar_container name_container"
+    "info_container info_container";
+}
+
+.avatar_container {
+  grid-area: avatar_container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 }
 
 .avatar {
-  grid-area: avatar;
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.name {
-  grid-area: name;
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.fullName {
-  font-size: 3rem;
-}
-
-.info {
-  grid-area: info;
-  margin: 1rem;
-}
-
-.avatarImg {
   width: 100px;
   height: 100px;
   background-size: cover;
   border-radius: 100px;
   border: 1px solid grey;
+}
+
+.small_text {
+  font-size: small;
+  margin: 0.5rem;
+}
+
+.name_container {
+  grid-area: name_container;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 5rem;
+  background-color: var(--menu-bg);
+}
+
+.name {
+  font-size: 2rem;
+  color: var(--menu-cl);
+}
+
+.email {
+  color: var(--menu-cl);
+}
+
+.info_container {
+  grid-area: info_container;
+  margin: auto;
 }
 
 .button {

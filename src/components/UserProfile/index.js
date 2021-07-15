@@ -16,25 +16,22 @@ const UserProfile = () => {
       .then((res) => setInfo(res.data()));
   }, []);
 
-  console.log("info", info);
-
   return (
     <div>
       <div>
         <BurgerMenu />
       </div>
       <div className={S.grid_wrapper}>
-        <div className={S.avatar}>
-          <div
-            className={S.avatarImg}
-            style={{ backgroundImage: `url(${info.avatar})` }}
-          />
+        <div className={S.avatar_container}>
+          <div className={S.avatar} style={{ backgroundImage: `url(${info.avatar})` }} />
+          <span className={S.small_text}>Cambiar</span>
         </div>
-        <div className={S.name}>
-          <div className={S.fullName}>{currentUser.displayName}</div>
+        <div className={S.name_container}>
+          <div className={S.name}>{currentUser.displayName.toUpperCase()}</div>
+          <div className={S.email}>{currentUser.email}</div>
         </div>
-        <div className={S.info}>
-          <button className={S.button}>Ver Historial</button>
+        <div className={S.info_container}>
+          {/* <button className={S.button}>Ver Historial</button> */}
           <div>{info.gender === "M" ? <p>Hombre</p> : <p>Mujer</p>}</div>
         </div>
       </div>
