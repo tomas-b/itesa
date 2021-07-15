@@ -21,6 +21,11 @@ const Menu = () => {
       : { opacity: 0, transform: "translateX(-100%)" },
   });
 
+  let logOut = () => {
+    setShowMenu(false);
+    base.auth().signOut();
+  }
+
   return (
     <a.div className={S.menu_wrapper} style={animation}>
       <div className={S.menu_container}>
@@ -42,7 +47,7 @@ const Menu = () => {
           </li>
         </ul>
         <div className={S.logout_wrapper}>
-          <button onClick={() => base.auth().signOut()}>CERRAR SESION</button>
+          <button onClick={logOut}>CERRAR SESION</button>
         </div>
       </div>
     </a.div>
