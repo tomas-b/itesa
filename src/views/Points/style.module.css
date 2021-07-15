@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  margin: 20px auto;
+  position: relative;
+  height: 100vh;
+  width: 600px;
+  overflow: hidden;
+}
