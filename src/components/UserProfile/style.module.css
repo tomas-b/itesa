@@ -1,4 +1,4 @@
-.container {
+.grid_wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 0.5fr 1.5fr;
@@ -7,18 +7,21 @@
   grid-template-areas:
     "avatar name"
     "info info";
+  background-color: lightcyan;
 }
 
 .avatar {
   grid-area: avatar;
   display: flex;
   justify-content: center;
+  padding: 1rem;
 }
 
 .name {
   grid-area: name;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .fullName {

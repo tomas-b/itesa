@@ -20,8 +20,10 @@ const UserProfile = () => {
 
   return (
     <div>
-      <BurgerMenu />
-      <div className={S.container}>
+      <div>
+        <BurgerMenu />
+      </div>
+      <div className={S.grid_wrapper}>
         <div className={S.avatar}>
           <div
             className={S.avatarImg}
