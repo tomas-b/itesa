@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import S from './styles.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,13 @@ const Tutorial = () => {
 	let exer = exercises.find(exer => exer.id == paramId)
 
 	let history = useHistory()
+	let videoRef = useRef()
+
+	useEffect(()=>{
+		videoRef.current.addEventListener('playing', ()=>{
+			videoRef.current.classList.add(S.playing)
+		})
+	},[])
 
 
 	return (
@@ -21,7 +28,7 @@ const Tutorial = () => {
 		<div className={S.go_back} onClick={()=>history.goBack()}>
 			 <FontAwesomeIcon icon={faChevronCircleLeft}/> <span>Go Back</span>
 		</div>
-		<video controls autoPlay muted loop className={S.video}>
+		<video ref={videoRef} autoPlay muted loop className={S.video}>
 			<source src={exer.videoFile} type="video/mp4"/>
 		</video> 
 		<div className={S.description}>
