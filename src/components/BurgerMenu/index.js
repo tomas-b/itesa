@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilState } from "recoil";
 
-import { showMenuState } from "../../components/Menu";
+import Menu, { showMenuState } from "../../components/Menu";
 import S from "./styles.module.css";
 
 const BurgerMenu = () => {
@@ -11,6 +11,8 @@ const BurgerMenu = () => {
   console.log("showMenu en BurgerMenu", showMenu);
 
   return (
+    <>
+    <Menu/>
     <div>
       <FontAwesomeIcon
         className={S.icon}
@@ -21,6 +23,7 @@ const BurgerMenu = () => {
         }}
       />
     </div>
+    </>
   );
 };
 
