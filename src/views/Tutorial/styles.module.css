@@ -6,6 +6,12 @@
 
 .video {
 	width: 100%;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.playing {
+	opacity: 1;
 }
 
 .description {
@@ -41,5 +47,5 @@
 	z-index: 99;
 	font-size: 25px;
 	margin:1em;
-	text-shadow: -2px 2px 5px white;
+	filter: drop-shadow( -1px 1px 3px white)
 }
