@@ -31,6 +31,7 @@ const MindArViewer = () => {
         />
         <a-asset-item
           id="avatarModel"
+          /* Esto es lo que hay que cambiar para otro modelo 3D */
           src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@0.3.1/examples/assets/card-example/softmind/scene.gltf"
         ></a-asset-item>
       </a-assets>
