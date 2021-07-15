@@ -7,6 +7,8 @@ import SingUp from "./views/Auth/SignUp";
 import LogIn from "./views/Auth/LogIn";
 import Home from "./views/Home";
 import UserProfile from "./components/UserProfile";
+import Categories from "./views/Categories";
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/singup" component={SingUp} />
           <PrivateRoute exact path="/perfil" component={UserProfile} />
+          <PrivateRoute path="/categories/:name" component={Categories} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>

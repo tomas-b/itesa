@@ -4,8 +4,7 @@ import base from "../../base";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import CategoriesCard from "../../components/CategoriesCard";
 import s from "./style.module.css";
 
 const Home = () => {
@@ -27,6 +26,15 @@ const Home = () => {
       .then((res) => setGender(res.data().gender));
   }, []);
 
+  // let categories = ["Biceps", "Piernas", "Abdominales", "Pecho"];
+  let categories = [
+    { name: "Biceps", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
+    { name: "Piernas", image: "https://www.risewisesewd.it/wp-content/uploads/2020/11/squat-fb.jpg" },
+    { name: "Abdominales", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjzqpShuUpo_tc_cXB_0p0NTsXizeHBBsS4w&usqp=CAU" },
+    { name: "Pecho", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc241Aynp0zPG7UJT1ejQh-qjCxSkNjHobzA&usqp=CAU" },
+  ];
+
+
   return (
     <>
       <Menu />
@@ -43,22 +51,9 @@ const Home = () => {
           <h3>Qué músculo querés trabajar hoy?</h3>
         </div>
         <div className={s.grid}>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
-          <div className={s.card}>
-            <div></div>
-            <h4>Ejercicio</h4>
-          </div>
+          {categories.map((category) => {
+            return <CategoriesCard {...category}/>;
+          })}
         </div>
       </div>
     </>
