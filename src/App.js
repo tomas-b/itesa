@@ -18,7 +18,7 @@ const App = () => {
           <PrivateRoute exact path="/" component={Home} />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/singup" component={SingUp} />
-          <Route path="/categories/:name" component={Categories} />
+          <PrivateRoute path="/categories/:name" component={Categories} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>

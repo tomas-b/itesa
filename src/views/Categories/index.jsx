@@ -3,6 +3,7 @@ import React from "react";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Card from "../../components/Card";
+import Search from "../../components/Search";
 
 import s from "./style.module.css";
 
@@ -37,7 +38,7 @@ const Categories = () => {
           <h2>Descubre todos los ejercicios de {name}</h2>
         </div>
         <div className={s.search}>
-          <input type="text" placeholder="Buscá tu ejercicio" />
+          <Search />
         </div>
         <div className={s.grid}>
           <div className={s.carroussel}>

@@ -29,9 +29,9 @@ const Home = () => {
   // let categories = ["Biceps", "Piernas", "Abdominales", "Pecho"];
   let categories = [
     { name: "Biceps", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-    { name: "Piernas", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-    { name: "Abdominales", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-    { name: "Pecho", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
+    { name: "Piernas", image: "https://www.risewisesewd.it/wp-content/uploads/2020/11/squat-fb.jpg" },
+    { name: "Abdominales", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjzqpShuUpo_tc_cXB_0p0NTsXizeHBBsS4w&usqp=CAU" },
+    { name: "Pecho", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc241Aynp0zPG7UJT1ejQh-qjCxSkNjHobzA&usqp=CAU" },
   ];
 
 
