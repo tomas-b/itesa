@@ -11,12 +11,14 @@
   /* float: left; */
   display:grid;
   grid-template-rows: max-content max-content 1fr max-content;
+  max-width: 80vw;
 }
 .title {
   font-size: 25px;
   margin-top: 30px;
   margin-bottom: 10px;
   font-weight: bold;
+  max-width: 100vw;
 }
 
 .features {
