@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import s from "./style.module.css"
 
-const Card = ({name, needs, image}) => {
+const Card = ({id, name, needs, image}) => {
   return (
     <div className={s.card}>
       <div className={s.title}>{name}</div>
@@ -16,9 +17,9 @@ const Card = ({name, needs, image}) => {
         style={{backgroundImage: `url('${image}')`}}
       ></div>
       <div className={s.btn_wrapper}>
-      <a href="https://www.youtube.com/watch?v=iGYeHsgb4CY&ab_channel=ATHLEAN-X%E2%84%A2" className={s.btn}>
+      <Link to={`/tutorial/${id}`} className={s.btn}>
         Tutorial
-      </a>
+      </Link>
       </div>
     </div>
   );

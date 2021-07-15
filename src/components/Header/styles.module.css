@@ -11,9 +11,10 @@
 }
 
 .header {
-  margin: 1em;
+  padding: 1em;
   margin-bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 100vw;
 }

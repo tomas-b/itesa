@@ -8,6 +8,7 @@ import LogIn from "./views/Auth/LogIn";
 import Home from "./views/Home";
 import UserProfile from "./components/UserProfile";
 import Categories from "./views/Categories";
+import Tutorial from "./views/Tutorial";
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path="/singup" component={SingUp} />
           <PrivateRoute exact path="/perfil" component={UserProfile} />
           <PrivateRoute path="/categories/:name" component={Categories} />
+          <PrivateRoute path="/tutorial/:video" component={Tutorial} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>
