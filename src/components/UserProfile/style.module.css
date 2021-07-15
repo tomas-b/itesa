@@ -1,0 +1,49 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "avatar name"
+    "info info";
+}
+
+.avatar {
+  grid-area: avatar;
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  grid-area: name;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.fullName {
+  font-size: 3rem;
+}
+
+.info {
+  grid-area: info;
+  margin: 1rem;
+}
+
+.avatarImg {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  border-radius: 100px;
+  border: 1px solid grey;
+}
+
+.button {
+  margin: 2% 4%;
+  padding: 4%;
+  background: var(--auth-bg);
+  color: var(--auth-cl);
+  border: 1px solid var(--auth-cl);
+  -webkit-appearance: none;
+  border-radius: 0;
+}
