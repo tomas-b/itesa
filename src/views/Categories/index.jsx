@@ -20,9 +20,20 @@ const Categories = () => {
           <input type="text" placeholder="Buscá tu ejercicio" />
         </div>
         <div className={s.grid}>
-          <Card />
-          <Card />
-          <Card />
+        <div className={s.carroussel}>
+          <div className={s.item}>
+            <h3>sarasa</h3>
+          </div>
+          <div className={s.item}>
+            <h3>sarasa</h3>
+          </div>
+          <div className={s.item}>
+            <h3>sarasa</h3>
+          </div>
+          <div className={s.item}>
+            <h3>sarasa</h3>
+          </div>
+        </div>
         </div>
       </div>
     </>

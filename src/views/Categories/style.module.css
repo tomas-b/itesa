@@ -67,3 +67,33 @@
     width: 60%;
   }
 }
+
+/*******************/
+.grid_wrapper {
+  grid-template-rows: min-content min-content min-content min-content 1fr;
+}
+
+.carroussel {
+  height: 90%;
+  display: flex;
+  overflow-y: scroll;
+  scroll-snap-type: both mandatory;
+  background: red;
+}
+
+.item {
+  width: 80%;
+  height: 92%;
+  margin: 4%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  background: blue;
+}
+
+
+.item:first-child {
+  margin-left: 15%;
+}
+.item:last-child {
+  margin-right: 15%;
+}
