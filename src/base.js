@@ -8,7 +8,9 @@ const app = firebase.initializeApp({
   projectId: "itesa-p5",
   storageBucket: "itesa-p5.appspot.com",
   messagingSenderId: "159222681310",
-  appId: "1:159222681310:web:31146d63cfc48d0df97c4f"
+  appId: "1:159222681310:web:31146d63cfc48d0df97c4f",
 });
+
+export const db = firebase.firestore();
 
 export default app;

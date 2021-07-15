@@ -31,9 +31,10 @@ const SingUp = () => {
               .collection("users")
               .doc(user.uid)
               .set({
-                gender: form.gender
+                gender: form.gender,
+                avatar: "https://i.stack.imgur.com/frlIf.png",
               })
-              .then(res=>history.push("/"));
+              .then((res) => history.push("/"));
           })
           .catch((res) => console.error(res));
       })
@@ -58,12 +59,7 @@ const SingUp = () => {
           onChange={inputChange}
           required
         />
-        <input
-          name="email"
-          placeholder="EMAIL"
-          onChange={inputChange}
-          required
-        />
+        <input name="email" placeholder="EMAIL" onChange={inputChange} required />
         <input
           name="password"
           type="password"
@@ -81,8 +77,7 @@ const SingUp = () => {
           <label htmlFor="ToS">
             Acepto la
             <a href="#">política de privacidad</a>y los
-            <a href="#">terminos y condiciones de uso</a>y Activaciones de
-            Marketing.
+            <a href="#">terminos y condiciones de uso</a>y Activaciones de Marketing.
           </label>
         </div>
         <input type="submit" value="REGISTRARME" />

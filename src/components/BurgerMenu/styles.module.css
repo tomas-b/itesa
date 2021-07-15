@@ -1,0 +1,8 @@
+.icon {
+  color: var(--main-menu);
+  font-size: 2em;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
