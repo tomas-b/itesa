@@ -4,7 +4,7 @@ import base from "../../base";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
-import CategoriesCard from "../../components/CategoriesCard.jsx";
+import CategoriesCard from "../../components/CategoriesCard";
 import s from "./style.module.css";
 
 const Home = () => {

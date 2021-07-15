@@ -20,7 +20,7 @@ const Categories = () => {
     {
       name: "Push Ups",
       needs: ["Barra", "banquito"],
-      image: "/exercises/pushUps.png",
+      image: "/exercises/pushups.png",
     },
     {
       name: "Bicep curl",
@@ -34,11 +34,11 @@ const Categories = () => {
       <Menu />
       <div className={s.grid_wrapper}>
         <Header className={s.header} />
-        <div className={s.welcome}>
-          <h2>Descubre todos los ejercicios de {name}</h2>
-        </div>
         <div className={s.search}>
           <Search />
+        </div>
+        <div className={s.title}>
+          <h2>Descubre todos los ejercicios de {name}</h2>
         </div>
         <div className={s.grid}>
           <div className={s.carroussel}>

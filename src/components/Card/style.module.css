@@ -1,7 +1,7 @@
 .card {
   background: var(--main-card-bg);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 35px;
   /* margin: 50px 20px 20px 20px; */
   /* width: 350px; */
   /* padding: 20px; */
@@ -10,21 +10,33 @@
   color: var(--main-card-cl);
   /* float: left; */
   display:grid;
-  grid-template-rows: max-content 1fr max-content max-content;
+  grid-template-rows: max-content max-content 1fr max-content;
 }
 .title {
   font-size: 25px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
 }
 
 .features ul {
   padding: 0;
-  /* margin: 20px 0 50px 0; */
+  margin:0 auto;
+  text-align: left;
   list-style-type: none;
 }
 
+.features li:first-child {
+  color: var(--main-card-alt)
+}
+
 .features li {
-  margin: 10px 0;
-  font-size: 14px;
+  font-weight: bold;
 }
 
 .btn_wrapper {
@@ -33,11 +45,11 @@
 }
 
 .btn {
-  background: blue;
-  color: white;
-  padding: 15px 20px;
-  /* margin: 20px 0; */
-  border-radius: 5px;
+  background: var(--main-btn-bg);
+  color: var(--main-btn-cl);
+  padding: 15px 30px;
+  margin: 0 -20px;
+  border-radius: 35px;
   box-shadow: rgba(0, 0, 0, 0.9);
   transition: all 200ms ease-in-out;
   text-decoration: none;
@@ -46,4 +58,5 @@
 .image {
   background: no-repeat center center;
   background-size: contain;
+  margin-bottom: 5px;
 }
