@@ -1,12 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../Auth";
 import base from "../../base";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import CategoriesCard from "../../components/CategoriesCard.jsx";
 import s from "./style.module.css";
 
 const Home = () => {
@@ -29,7 +27,13 @@ const Home = () => {
   }, []);
 
   // let categories = ["Biceps", "Piernas", "Abdominales", "Pecho"];
-  let categories = [{name: "Biceps", imgUrl: "url"}, {name: "Piernas", imgUrl: "url"}, {name: "Abdominales", imgUrl: "url"}, {name: "Pecho", imgUrl: "url"} ];
+  let categories = [
+    { name: "Biceps", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
+    { name: "Piernas", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
+    { name: "Abdominales", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
+    { name: "Pecho", image: "https://images.pexels.com/photos/1547248/pexels-photo-1547248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
+  ];
+
 
   return (
     <>
@@ -47,16 +51,8 @@ const Home = () => {
           <h3>Qué músculo querés trabajar hoy?</h3>
         </div>
         <div className={s.grid}>
-          {categories.map((category, index) => {
-            return (
-              <div key={index} className={s.card}>
-                <Link to={`/categories/${category.name}`}>
-                  <div className={s.card}>
-                  </div>
-                </Link>
-                <h4>{category.name}</h4>
-              </div>
-            );
+          {categories.map((category) => {
+            return <CategoriesCard {...category}/>;
           })}
         </div>
       </div>

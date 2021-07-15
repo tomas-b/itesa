@@ -44,6 +44,6 @@
 }
 
 .image {
-  height: 200px;
   background: no-repeat center center;
+  background-size: contain;
 }
