@@ -10,7 +10,7 @@ const Card = ({name, needs, image}) => {
       <div className={s.features}>
         <ul>
           <li>Necesitas...</li>
-          {needs.map(need=><li>{need}</li>)}
+          <li>{needs.join(', ')}</li>
         </ul>
       </div>
       <div className={s.btn_wrapper}>

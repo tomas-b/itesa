@@ -78,6 +78,7 @@
   display: flex;
   overflow-y: scroll;
   scroll-snap-type: both mandatory;
+  scrollbar-width: none;
   /* background:blue; */
 }
 
@@ -96,4 +97,13 @@
 }
 .item:last-child {
   margin-right: 15%;
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: transparent;  /* Optional: just make scrollbar invisible */
 }
