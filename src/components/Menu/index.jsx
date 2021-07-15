@@ -41,7 +41,7 @@ const Menu = () => {
             <Link to="/">ENTRENAMIENTO</Link>
           </li>
           <li>
-            <Link to="/">SUMÁ PUNTOS</Link>
+            <Link to="/points">SUMÁ PUNTOS</Link>
           </li>
           <li>
             <Link to="/perfil">MI PERFIL</Link>
