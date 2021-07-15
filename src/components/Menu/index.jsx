@@ -14,6 +14,7 @@ export const showMenuState = atom({
 
 const Menu = () => {
   let [showMenu, setShowMenu] = useRecoilState(showMenuState);
+  console.log("show menu en Menu", showMenu);
 
   let animation = useSpring({
     to: showMenu
@@ -21,9 +22,14 @@ const Menu = () => {
       : { opacity: 0, transform: "translateX(-100%)" },
   });
 
+  let logOut = () => {
+    setShowMenu(false);
+    base.auth().signOut();
+  };
+
   return (
     <a.div className={S.menu_wrapper} style={animation}>
-      <div className={S.menu_container} >
+      <div className={S.menu_container}>
         <div className={S.close} onClick={() => setShowMenu(false)}>
           <FontAwesomeIcon icon={faTimes} />
         </div>
@@ -38,11 +44,11 @@ const Menu = () => {
             <Link to="/">SUMÁ PUNTOS</Link>
           </li>
           <li>
-            <Link to="/">MI PERFIL</Link>
+            <Link to="/perfil">MI PERFIL</Link>
           </li>
         </ul>
         <div className={S.logout_wrapper}>
-        <button onClick={() => base.auth().signOut()}>CERRAR SESION</button>
+          <button onClick={logOut}>CERRAR SESION</button>
         </div>
       </div>
     </a.div>
