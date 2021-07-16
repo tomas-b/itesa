@@ -51,8 +51,8 @@ const Home = () => {
           <h3>Qué músculo querés trabajar hoy?</h3>
         </div>
         <div className={s.grid}>
-          {categories.map((category) => {
-            return <CategoriesCard {...category}/>;
+          {categories.map((category, i) => {
+            return <CategoriesCard key={i} {...category}/>;
           })}
         </div>
       </div>
