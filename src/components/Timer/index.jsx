@@ -36,7 +36,7 @@ const Dial = () => {
 			console.log(x_, y_)
 		}))
 
-  }, [window.innerWidth]);
+  }, []); // [window.innerWidth]);
 
   return (
     <div className={S.dial} ref={dialRef}>

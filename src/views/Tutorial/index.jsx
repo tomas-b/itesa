@@ -34,8 +34,12 @@ const Tutorial = () => {
     <>
       <Menu />
       <div className={S.grid_wrapper}>
-        <Header className={S.header} />
 				<div className={S.tutorial_wrapper}>
+
+					<div className={S.header}>
+						<Header />
+					</div>
+
 					<video ref={videoRef} autoPlay muted loop className={S.video}>
 						<source src={exer.videoFile} type="video/mp4"/>
 					</video> 
@@ -48,6 +52,7 @@ const Tutorial = () => {
 						<button onClick={()=>setShowTimer(true)}>Empezar Ejercicio</button>
 						<Timer show={showTimer}/>
 					</div>
+
 				</div>
       </div>
     </>
