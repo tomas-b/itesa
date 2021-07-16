@@ -33,7 +33,6 @@ const Dial = () => {
 			let y_ = top + height / 2
 			dialRef.current.getElementsByClassName(S.selected)[0]?.classList.remove(S.selected)
 			document.elementFromPoint(x_, y_)?.classList.add(S.selected)
-			console.log(x_, y_)
 		}))
 
   }, []); // [window.innerWidth]);

@@ -25,10 +25,7 @@ const LogIn = () => {
 			.auth()
 			.signInWithEmailAndPassword(form.email, form.password)
       .then((data)=>{
-        console.log(data)
-        console.log('pushin')
         history.push('/')
-        console.log('pusheeedd')
       })
       .catch(res=>console.error(res))
   };

@@ -14,7 +14,6 @@ export const showMenuState = atom({
 
 const Menu = () => {
   let [showMenu, setShowMenu] = useRecoilState(showMenuState);
-  console.log("show menu en Menu", showMenu);
 
   let animation = useSpring({
     to: showMenu

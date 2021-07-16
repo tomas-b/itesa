@@ -8,7 +8,6 @@ import S from "./styles.module.css";
 
 const BurgerMenu = () => {
   let [showMenu, setShowMenu] = useRecoilState(showMenuState);
-  console.log("showMenu en BurgerMenu", showMenu);
 
   return (
     <>
@@ -18,7 +17,6 @@ const BurgerMenu = () => {
         className={S.icon}
         icon={faBars}
         onClick={() => {
-          console.log("hola");
           setShowMenu(true);
         }}
       />

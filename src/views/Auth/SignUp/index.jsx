@@ -16,7 +16,6 @@ const SingUp = () => {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     base
       .auth()
       .createUserWithEmailAndPassword(form.email, form.password)
