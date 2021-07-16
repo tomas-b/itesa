@@ -1,17 +1,32 @@
 import { useParams } from "react-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+// import { useRecoilState } from "recoil";
+
+// import { exercisesState } from "../../data/exercises.js";
+import { db } from "../../base";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Card from "../../components/Card";
 import Search from "../../components/Search";
-import { useRecoilState } from 'recoil';
-import { exercisesState } from "../../data/exercises.js"
-
 import s from "./style.module.css";
 
 const Categories = () => {
   let { name } = useParams();
-  let [exercises, setExercises] = useRecoilState(exercisesState)
+  let [exercises, setExercises] = useState([]);
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    getExercises();
+  }, []);
+
+  const getExercises = async () => {
+    let exercises = await db.collection("exercises").get();
+    exercises = exercises.docs.map((exercise) => exercise.data());
+    setExercises(exercises);
+    console.log("exercises", exercises);
+  };
 
   return (
     <>
@@ -26,8 +41,8 @@ const Categories = () => {
         </div>
         <div className={s.grid}>
           <div className={s.carroussel}>
-            {exercises.map((exercise) => (
-              <div className={s.item}>
+            {exercises.map((exercise, index) => (
+              <div key={index} className={s.item}>
                 <Card {...exercise} />
               </div>
             ))}
