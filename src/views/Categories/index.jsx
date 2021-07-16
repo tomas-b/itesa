@@ -1,10 +1,7 @@
 import { useParams } from "react-router";
 import React, { useEffect, useState } from "react";
 
-// import { useRecoilState } from "recoil";
-
-// import { exercisesState } from "../../data/exercises.js";
-import { db } from "../../base";
+import { getExercises } from "../../data/firestoreQueries";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Card from "../../components/Card";
@@ -15,18 +12,11 @@ const Categories = () => {
   let { name } = useParams();
   let [exercises, setExercises] = useState([]);
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
-    getExercises();
+    getExercises().then((exercises) => {
+      setExercises(exercises);
+    });
   }, []);
-
-  const getExercises = async () => {
-    let exercises = await db.collection("exercises").get();
-    exercises = exercises.docs.map((exercise) => exercise.data());
-    setExercises(exercises);
-    console.log("exercises", exercises);
-  };
 
   return (
     <>

@@ -1,23 +1,31 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import S from "./styles.module.css";
+import { useParams, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import { useRecoilState } from "recoil";
-import { exercisesState } from "../../data/exercises.js";
-import { useHistory } from "react-router-dom";
-import { AuthContext } from "../../Auth";
-import base from "../../base";
+
+import { getExercises } from "../../data/firestoreQueries";
+import S from "./styles.module.css";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Timer from "../../components/Timer";
 
 const Tutorial = () => {
-  let [showTimer, setShowTimer] = useState(false);
-
   let paramId = useParams().video;
-  let [exercises, setExercises] = useRecoilState(exercisesState);
-  let exer = exercises.find((exer) => exer.id == paramId);
+  let [showTimer, setShowTimer] = useState(false);
+  let [exercises, setExercises] = useState([]);
+  const [currentExercise, setCurrentExercise] = useState({});
+
+  useEffect(() => {
+    // Traer todos los ejercicios
+    getExercises().then((exercises) => {
+      setExercises(exercises);
+
+      // Despues traer el ejercicio actual segun el parametro id del url
+      let currentExercise = exercises.find((exer) => exer.id == parseInt(paramId));
+      setCurrentExercise(currentExercise);
+      console.log(currentExercise);
+    });
+  }, []);
 
   let history = useHistory();
   let videoRef = useRef();
@@ -39,11 +47,11 @@ const Tutorial = () => {
           </div>
 
           <video ref={videoRef} autoPlay muted loop className={S.video}>
-            <source src={exer.video} type="video/mp4" />
+            <source src={currentExercise.video} type="video/mp4" />
           </video>
 
           <div className={`${S.description} ${showTimer ? S.timer : ""}`}>
-            <h2>{exer.name}</h2>
+            <h2>{currentExercise.name}</h2>
             <button className={S.back} onClick={() => history.goBack()}>
               <FontAwesomeIcon icon={faChevronCircleLeft} /> Atrás
             </button>

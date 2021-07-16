@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
-import { db } from "../../base";
+
+import { getCategories } from "../../data/firestoreQueries";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
@@ -12,14 +13,8 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getCategories();
+    getCategories().then((categories) => setCategories(categories));
   }, []);
-
-  const getCategories = async () => {
-    let categories = await db.collection("categories").get();
-    categories = categories.docs.map((category) => category.data());
-    setCategories(categories);
-  };
 
   return (
     <>
