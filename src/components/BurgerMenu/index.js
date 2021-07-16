@@ -7,20 +7,21 @@ import Menu, { showMenuState } from "../../components/Menu";
 import S from "./styles.module.css";
 
 const BurgerMenu = () => {
+  // eslint-disable-next-line no-unused-vars
   let [showMenu, setShowMenu] = useRecoilState(showMenuState);
 
   return (
     <>
-    <Menu/>
-    <div>
-      <FontAwesomeIcon
-        className={S.icon}
-        icon={faBars}
-        onClick={() => {
-          setShowMenu(true);
-        }}
-      />
-    </div>
+      <Menu />
+      <div>
+        <FontAwesomeIcon
+          className={S.icon}
+          icon={faBars}
+          onClick={() => {
+            setShowMenu(true);
+          }}
+        />
+      </div>
     </>
   );
 };
