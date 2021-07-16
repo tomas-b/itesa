@@ -1,11 +1,12 @@
 .tutorial_wrapper {
 	height: 100vh;
 	width: 100vw;
-	background: black
+	background:black;
 }
 
 .video {
-	width: 100%;
+	min-width: 100vw;
+	height: 100%;
 	opacity: 0;
 	transition: opacity 1s;
 }
@@ -15,12 +16,12 @@
 }
 
 .description {
+	text-align: center;
 	position: absolute;
 	height: 30%;
 	bottom:0;
 	width: 100%;
 	background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5555266051733193) 34%, rgba(0,0,0,1) 100%);
-	padding-left: 10vw;
 }
 
 .description h2 {
@@ -32,8 +33,8 @@
 
 .description button {
 	border: none;
-  background: var(--main-btn-bg);
-  color: var(--main-btn-cl);
+	background: var(--main-nav-bg-active);
+	color: var(--main-nav-cl-active);
   padding: 15px 30px;
   margin: 10px 5px;
   border-radius: 35px;
@@ -42,10 +43,40 @@
   text-decoration: none;
 }
 
-.go_back {
-	position: absolute;
-	z-index: 99;
-	font-size: 25px;
-	margin:1em;
-	filter: drop-shadow( -1px 1px 3px white)
+.description .back svg {
+	margin-right: 5px;
+}
+
+.description .back {
+  background: var(--main-btn-bg);
+  color: black;
+}
+
+.timer {
+	animation: transitionToTimer 1.5s forwards ease-out;
+	display: grid;
+	grid-template-rows: max-content;
+}
+
+.timer > button {
+	display: none;
+}
+
+@keyframes transitionToTimer {
+	0% {
+		background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 34%, rgba(0,0,0,1) 100%);
+		height: 30%;
+		padding: 0px;
+		padding-top: 20px;
+	}
+	30% {
+		height: calc(100vh - 82px);
+		background: rgba(	110 138 250 / 0.1);
+	}
+	100% {
+		height: calc(100vh - 82px);
+		background: rgba(	110 138 250 / 0.5);
+		padding: 0;
+		padding-top: 20px;
+	}
 }

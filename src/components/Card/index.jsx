@@ -18,7 +18,7 @@ const Card = ({id, name, needs, image}) => {
       ></div>
       <div className={s.btn_wrapper}>
       <Link to={`/tutorial/${id}`} className={s.btn}>
-        Tutorial
+        Ver Tutorial
       </Link>
       </div>
     </div>
