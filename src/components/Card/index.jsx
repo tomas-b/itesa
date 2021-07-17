@@ -1,29 +1,32 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import s from "./style.module.css"
+import { Link } from "react-router-dom";
+import s from "./style.module.css";
 
-const Card = ({id, name, needs, image}) => {
+const Card = ({ exercise, setCurrentExercise }) => {
   return (
     <div className={s.card}>
-      <div className={s.title}>{name}</div>
+      <div className={s.title}>{exercise.name}</div>
       <div className={s.features}>
         <ul>
           <li>Necesitas...</li>
-          <li>{needs.join(', ')}</li>
+          <li>{exercise.needs.join(", ")}</li>
         </ul>
       </div>
       <div
         className={s.image}
-        style={{backgroundImage: `url('${image}')`}}
+        style={{ backgroundImage: `url('${exercise.image}')` }}
       ></div>
       <div className={s.btn_wrapper}>
-      <Link to={`/tutorial/${id}`} className={s.btn}>
-        Ver Tutorial
-      </Link>
+        <Link
+          to={`/tutorial/${exercise.id}`}
+          className={s.btn}
+          onClick={() => setCurrentExercise(exercise)}
+        >
+          Ver Tutorial
+        </Link>
       </div>
     </div>
   );
-
-}
+};
 
 export default Card;

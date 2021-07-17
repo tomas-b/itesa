@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import React, { useEffect, useState } from "react";
+import { atom, useSetRecoilState } from "recoil";
 
 import { getExercises } from "../../data/firestoreQueries";
 import Menu from "../../components/Menu";
@@ -8,7 +9,14 @@ import Card from "../../components/Card";
 import Search from "../../components/Search";
 import s from "./style.module.css";
 
+export const currentExerciseState = atom({
+  key: "currentExerciseState",
+  default: {},
+});
+
 const Categories = () => {
+  const setCurrentExercise = useSetRecoilState(currentExerciseState);
+
   let { name } = useParams();
   let [exercises, setExercises] = useState([]);
 
@@ -33,7 +41,7 @@ const Categories = () => {
           <div className={s.carroussel}>
             {exercises.map((exercise, index) => (
               <div key={index} className={s.item}>
-                <Card {...exercise} />
+                <Card exercise={exercise} setCurrentExercise={setCurrentExercise} />
               </div>
             ))}
           </div>

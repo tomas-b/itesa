@@ -1,31 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilValue } from "recoil";
 
-import { getExercises } from "../../data/firestoreQueries";
+import { currentExerciseState } from "../Categories";
 import S from "./styles.module.css";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Timer from "../../components/Timer";
 
 const Tutorial = () => {
-  let paramId = useParams().video;
   let [showTimer, setShowTimer] = useState(false);
-  let [exercises, setExercises] = useState([]);
-  const [currentExercise, setCurrentExercise] = useState({});
-
-  useEffect(() => {
-    // Traer todos los ejercicios
-    getExercises().then((exercises) => {
-      setExercises(exercises);
-
-      // Despues traer el ejercicio actual segun el parametro id del url
-      let currentExercise = exercises.find((exer) => exer.id == parseInt(paramId));
-      setCurrentExercise(currentExercise);
-      console.log(currentExercise);
-    });
-  }, []);
+  const currentExercise = useRecoilValue(currentExerciseState);
 
   let history = useHistory();
   let videoRef = useRef();
