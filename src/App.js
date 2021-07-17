@@ -6,9 +6,9 @@ import PrivateRoute from "./PrivateRoute";
 import SingUp from "./views/Auth/SignUp";
 import LogIn from "./views/Auth/LogIn";
 import Home from "./views/Home";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./views/UserProfile";
 import Categories from "./views/Categories";
-import Points from "./views/Points"
+import Points from "./views/Points";
 import Tutorial from "./views/Tutorial";
 
 const App = () => {

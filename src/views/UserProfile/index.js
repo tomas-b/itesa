@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
 
 import { db } from "../../base";
-import BurgerMenu from "../BurgerMenu";
+import BurgerMenu from "../../components/BurgerMenu";
 import S from "./style.module.css";
 
 const UserProfile = () => {
