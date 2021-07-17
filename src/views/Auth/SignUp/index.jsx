@@ -16,6 +16,9 @@ const SingUp = () => {
 
   const formSubmit = (e) => {
     e.preventDefault();
+    if (form.name.trim() === "") {
+      return alert("El nombre no puede ser vacio");
+    }
     base
       .auth()
       .createUserWithEmailAndPassword(form.email, form.password)
@@ -37,7 +40,10 @@ const SingUp = () => {
           })
           .catch((res) => console.error(res));
       })
-      .catch((res) => console.error(res));
+      .catch((res) => {
+        console.error(res);
+        alert(res.message);
+      });
   };
 
   const inputChange = (e) => {
@@ -58,10 +64,18 @@ const SingUp = () => {
           onChange={inputChange}
           required
         />
-        <input name="email" placeholder="EMAIL" onChange={inputChange} required />
+        <input
+          name="email"
+          type="email"
+          placeholder="EMAIL"
+          onChange={inputChange}
+          required
+        />
         <input
           name="password"
           type="password"
+          minLength="6"
+          title="La contraseña debe tener un minimo de 6 caracteres"
           placeholder="CONTRASEÑA"
           onChange={inputChange}
           required
@@ -76,7 +90,8 @@ const SingUp = () => {
           <label htmlFor="ToS">
             Acepto la
             <a href="#">política de privacidad</a>y los
-            <a href="#">terminos y condiciones de uso</a>y Activaciones de Marketing.
+            <a href="#">terminos y condiciones de uso</a>y Activaciones de
+            Marketing.
           </label>
         </div>
         <input type="submit" value="REGISTRARME" />
