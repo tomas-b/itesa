@@ -4,6 +4,7 @@
   border-radius: 35px;
   text-align: center;
   max-height: 100%;
+  height: 400px;
   color: var(--main-card-cl);
   display: grid;
   grid-template-rows: max-content max-content 1fr max-content;
