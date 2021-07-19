@@ -1,5 +1,6 @@
 .grid {
   grid-area: cards;
+  align-self: center;
   max-width: 100vw;
 }
 
@@ -16,7 +17,6 @@
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  
 }
 
 .grid_wrapper {
@@ -38,7 +38,7 @@
 
 .welcome {
   grid-area: welcome;
-  margin:0 1em;
+  margin: 0 1em;
   text-align: center;
 }
 .welcome h2 {
@@ -64,8 +64,8 @@
   padding: 1em;
   max-width: 100vw;
   text-align: center;
-  font-size:.9em;
-  color: var(--main-cl)
+  font-size: 0.9em;
+  color: var(--main-cl);
 }
 
 @media screen and (min-width: 900px) {
@@ -97,7 +97,6 @@
   /* background:red; */
 }
 
-
 .item:first-child {
   margin-left: 10%;
 }
@@ -106,10 +105,10 @@
 }
 
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-    background: transparent;  /* Optional: just make scrollbar invisible */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
