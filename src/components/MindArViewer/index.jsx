@@ -6,6 +6,14 @@ const MindArViewer = () => {
   useEffect(() => {
     const sceneEl = sceneRef.current;
     const arSystem = sceneEl.systems["mindar-system"];
+    const coca = document.getElementById("cocaCola");
+    coca.addEventListener("targetFound", (event) => {
+      console.log("ENCONTRE LA COCA y el id es:", event.target.id);
+    });
+    const gatorade = document.getElementById("gatorade");
+    gatorade.addEventListener("targetFound", (event) => {
+      console.log("ENCONTRE GATORADE y el id es:", event.target.id);
+    });
     sceneEl.addEventListener("renderstart", () => {
       arSystem.start(); // start AR
     });
@@ -14,10 +22,17 @@ const MindArViewer = () => {
     };
   }, []);
 
+  //en la base de datos tenemos que tener cargo Todos los productos a escanear (coca , gateroda)
+  //traerlos a travez de firebase
+  //hacer un map que recorra los productos que traemos de firebase , generando un nuevo tag <a.entity id =""> con claramente como ID el nombre del producto para que cada TAG sea distinto y modificando el Target-index para que tambien sea diferente
+  //despues hacer dentro de ese mismo map un evvento para cada uno de los tags
+  //ya con eso vamos a tener un tag creado para cada uno de los productos y cada tag va a tener su propio "addEventListener"
+  //que ese "addEventListener" va a hacer los pedidos a la DB y traer TODA la info nuevamente que corresponde con lo que escaneamos
+
   return (
     <a-scene
       ref={sceneRef}
-      mindar="imageTargetSrc: ./targets.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: no;"
+      mindar="imageTargetSrc: ./coca-gatorade.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: no;"
       color-space="sRGB"
       embedded
       renderer="colorManagement: true, physicallyCorrectLights"
@@ -25,10 +40,6 @@ const MindArViewer = () => {
       device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <img
-          id="card"
-          src="./target"
-        />
         <a-asset-item
           id="avatarModel"
           /* Esto es lo que hay que cambiar para otro modelo 3D */
@@ -38,14 +49,16 @@ const MindArViewer = () => {
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0">
-        {/* <a-plane
-          src="#card"
-          position="0 0 0"
-          height="0.552"
-          width="1"
-          rotation="0 0 0"
-        ></a-plane> */}
+      <a-entity id="cocaCola" mindar-image-target="targetIndex: 0">
+        <a-gltf-model
+          rotation="0 0 0 "
+          position="0 0 0.1"
+          scale="0.005 0.005 0.005"
+          src="#avatarModel"
+          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+        ></a-gltf-model>
+      </a-entity>
+      <a-entity id="gatorade" mindar-image-target="targetIndex: 1">
         <a-gltf-model
           rotation="0 0 0 "
           position="0 0 0.1"
