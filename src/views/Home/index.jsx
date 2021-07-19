@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Auth";
+import { useSetRecoilState } from "recoil";
 
 import { getCategories } from "../../data/firestoreQueries";
+import { currentExerciseState } from "../Categories";
 import useSearch from "../../hooks/useSearch";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
@@ -12,9 +14,10 @@ import s from "./style.module.css";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
-  const [categories, setCategories] = useState([]);
-  const { query, searching, found, searchExercises, onChange } = useSearch();
+  const setCurrentExercise = useSetRecoilState(currentExerciseState);
+  const { query, searching, found, searchExercises, onChange, message } = useSearch();
 
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     getCategories().then((categories) => setCategories(categories));
   }, []);
@@ -43,7 +46,15 @@ const Home = () => {
             </div>
           </div>
         )}
-        <div className={s.grid}>{searching && <Card exercise={found} />}</div>
+        {searching && (
+          <div className={s.search_results_container}>
+            {message ? (
+              message
+            ) : (
+              <Card setCurrentExercise={setCurrentExercise} exercise={found} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );
