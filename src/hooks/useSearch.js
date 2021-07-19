@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { exercisesState } from "../views/Categories";
 import { getExercises } from "../data/firestoreQueries";
 
 const useSearch = () => {
   const [searching, setSearching] = useState(false);
   const [query, setQuery] = useState("");
-  const [found, setFound] = useState("");
-  const [exercises, setExercises] = useState([]);
+  const [found, setFound] = useState({});
+  const [message, setMessage] = useState("");
+  const [exercises, setExercises] = useRecoilState(exercisesState);
 
   useEffect(() => {
     getExercises().then((exercises) => setExercises(exercises));
@@ -14,11 +17,11 @@ const useSearch = () => {
   const searchExercises = (e) => {
     if (e.key === "Enter") {
       setSearching(true);
-      setFound(
-        exercises.find(
-          (exercise) => exercise.name.toLowerCase() === query.toLocaleLowerCase()
-        )
-      );
+      const found_exercise = exercises.find((exercise) => {
+        return exercise.name.toLowerCase().includes(query.toLocaleLowerCase());
+      });
+      if (found_exercise) setFound(found_exercise);
+      else setMessage("No se encontro ningun ejercicio");
       setQuery("");
     }
   };
@@ -34,6 +37,7 @@ const useSearch = () => {
     found,
     searchExercises,
     onChange,
+    message,
   };
 };
 

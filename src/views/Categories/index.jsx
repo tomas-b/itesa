@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
-import React, { useEffect, useState } from "react";
-import { atom, useSetRecoilState } from "recoil";
+import React, { useEffect } from "react";
+import { atom, useSetRecoilState, useRecoilState } from "recoil";
 
 import { getExercises } from "../../data/firestoreQueries";
 import Menu from "../../components/Menu";
@@ -14,11 +14,17 @@ export const currentExerciseState = atom({
   default: {},
 });
 
+export const exercisesState = atom({
+  key: "exercisesState",
+  default: [],
+});
+
 const Categories = () => {
   const setCurrentExercise = useSetRecoilState(currentExerciseState);
+  const [exercises, setExercises] = useRecoilState(exercisesState);
+  console.log("exercises", exercises);
 
   let { name } = useParams();
-  let [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     getExercises().then((exercises) => {
