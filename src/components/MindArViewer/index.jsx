@@ -45,15 +45,12 @@ const MindArViewer = () => {
                         });
                     });
             });
-            tag.addEventListener("arError", (event) => {
-                console.log("MindAR failed to start");
-            });
         });
     }, [productos]);
     return (
         <a-scene
             ref={sceneRef}
-            mindar="imageTargetSrc: ./coca-gatorade.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: no;"
+            mindar="imageTargetSrc: ./coca-gatorade.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: yes;"
             color-space="sRGB"
             embedded
             renderer="colorManagement: true, physicallyCorrectLights"
