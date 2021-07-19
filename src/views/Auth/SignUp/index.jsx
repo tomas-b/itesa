@@ -35,6 +35,7 @@ const SingUp = () => {
               .set({
                 gender: form.gender,
                 avatar: "https://i.stack.imgur.com/frlIf.png",
+                points : 0
               })
               .then((res) => history.push("/"));
           })
