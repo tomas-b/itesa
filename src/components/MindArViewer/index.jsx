@@ -11,6 +11,7 @@ const MindArViewer = () => {
     useEffect(() => {
         const sceneEl = sceneRef.current;
         const arSystem = sceneEl.systems["mindar-system"];
+
         const getProducts = async () => {
             let productos = await db.collection("productosParaEscanear").get();
             return productos.docs.map((producto) => producto.data());
@@ -19,6 +20,8 @@ const MindArViewer = () => {
         getProducts().then((data) => {
             setProductos(data);
         });
+
+        
         sceneEl.addEventListener("renderstart", () => {
             arSystem.start(); // start AR
         });
@@ -62,10 +65,10 @@ const MindArViewer = () => {
                 look-controls="enabled: false"
             ></a-camera>
             {productos.length
-                ? productos.map((producto) => {
+                ? productos.map((producto, i) => {
                       return (
                           <>
-                              <a-assets>
+                              <a-assets key={`${i}`}>
                                   <a-asset-item
                                       id="avatarModel"
                                       src={`${producto.imgUrl}`}
