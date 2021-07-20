@@ -8,24 +8,27 @@ const MindArViewer = () => {
   const [productos, setProductos] = useState([]);
   const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    const sceneEl = sceneRef.current;
-    const arSystem = sceneEl.systems["mindar-system"];
-    const getProducts = async () => {
-      let productos = await db.collection("productosParaEscanear").get();
-      return productos.docs.map((producto) => producto.data());
-    };
+    useEffect(() => {
+        const sceneEl = sceneRef.current;
+        const arSystem = sceneEl.systems["mindar-system"];
 
-    getProducts().then((data) => {
-      setProductos(data);
-    });
-    sceneEl.addEventListener("renderstart", () => {
-      arSystem.start(); // start AR
-    });
-    return () => {
-      arSystem.stop();
-    };
-  }, []);
+        const getProducts = async () => {
+            let productos = await db.collection("productosParaEscanear").get();
+            return productos.docs.map((producto) => producto.data());
+        };
+
+        getProducts().then((data) => {
+            setProductos(data);
+        });
+
+        
+        sceneEl.addEventListener("renderstart", () => {
+            arSystem.start(); // start AR
+        });
+        return () => {
+            arSystem.stop();
+        };
+    }, []);
 
   useEffect(() => {
     productos.map((producto) => {
@@ -43,6 +46,52 @@ const MindArViewer = () => {
             db.collection("users").doc(currentUser.uid).update({
               points: data,
             });
+<<<<<<< HEAD
+        });
+    }, [productos]);
+    return (
+        <a-scene
+            ref={sceneRef}
+            mindar="imageTargetSrc: ./coca-gatorade.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: yes;"
+            color-space="sRGB"
+            embedded
+            renderer="colorManagement: true, physicallyCorrectLights"
+            vr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false"
+        >
+            <a-camera
+                position="0 0 0"
+                look-controls="enabled: false"
+            ></a-camera>
+            {productos.length
+                ? productos.map((producto, i) => {
+                      return (
+                          <>
+                              <a-assets key={`${i}`}>
+                                  <a-asset-item
+                                      id="avatarModel"
+                                      src={`${producto.imgUrl}`}
+                                  ></a-asset-item>
+                              </a-assets>
+                              <a-entity
+                                  id={`${producto.name}`}
+                                  mindar-image-target={`targetIndex: ${producto.index} `}
+                              >
+                                  <a-gltf-model
+                                      rotation="0 0 0 "
+                                      position="0 0 0.1"
+                                      scale="0.005 0.005 0.005"
+                                      src="#avatarModel"
+                                      animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+                                  ></a-gltf-model>
+                              </a-entity>
+                          </>
+                      );
+                  })
+                : console.log("todavia no hay productos")}
+        </a-scene>
+    );
+=======
           });
       });
     });
@@ -87,6 +136,7 @@ const MindArViewer = () => {
         : console.log("todavia no hay productos")}
     </a-scene>
   );
+>>>>>>> 3fc1e6abc18f952cb7437d9b98d16a917d928d04
 };
 
 export default MindArViewer;
