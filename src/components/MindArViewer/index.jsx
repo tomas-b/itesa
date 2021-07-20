@@ -52,7 +52,7 @@ const MindArViewer = () => {
     return (
         <a-scene
             ref={sceneRef}
-            mindar="imageTargetSrc: ./coca-gatorade.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: yes;"
+            mindar="imageTargetSrc: ./productos.mind; autoStart: false; uiLoading: no; uiError: no; uiScanning: yes;"
             color-space="sRGB"
             embedded
             renderer="colorManagement: true, physicallyCorrectLights"
@@ -63,20 +63,20 @@ const MindArViewer = () => {
                 position="0 0 0"
                 look-controls="enabled: false"
             ></a-camera>
+            <a-assets>
+                <a-asset-item
+                    id="avatarModel"
+                    //   src={`${producto.imgUrl}`}
+                    src="/itesa.gltf"
+                ></a-asset-item>
+            </a-assets>
             {productos.length
-                ? productos.map((producto, i) => {
+                ? productos.map((producto) => {
                       return (
                           <>
-                              <a-assets key={`${i}`}>
-                                  <a-asset-item
-                                      id="avatarModel"
-                                      // src={`${producto.imgUrl}`}
-                                      src="/itesa.gltf"
-                                  ></a-asset-item>
-                              </a-assets>
                               <a-entity
-                                  id={`${producto.name}`}
-                                  mindar-image-target={`targetIndex: ${producto.index} `}
+                                  id={`${producto?.name}`}
+                                  mindar-image-target={`targetIndex: ${producto?.index} `}
                               >
                                   <a-gltf-model
                                       rotation="0 0 0 "
