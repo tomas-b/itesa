@@ -6,6 +6,12 @@
   margin: 20px auto;
   position: relative;
   height: 100vh;
-  width: 600px;
+  width: 100%;
   overflow: hidden;
+}
+
+.back {
+  background: var(--main-btn-bg);
+  color: black;
+  z-index: 2;
 }
