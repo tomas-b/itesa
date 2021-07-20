@@ -33,6 +33,7 @@ const UserProfile = () => {
         <div className={S.info_container}>
           {/* <button className={S.button}>Ver Historial</button> */}
           <div>{info.gender === "M" ? <p>Hombre</p> : <p>Mujer</p>}</div>
+          <div>{`Tenes ${info.points} Puntos`}</div>
         </div>
       </div>
     </div>
