@@ -4,53 +4,68 @@ import { db } from "../../../src/base";
 import { AuthContext } from "../../Auth";
 
 const MindArViewer = () => {
-  const sceneRef = useRef(null);
-  const [productos, setProductos] = useState([]);
-  const { currentUser } = useContext(AuthContext);
+    const sceneRef = useRef(null);
+    const [productos, setProductos] = useState([]);
+    const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    const sceneEl = sceneRef.current;
-    const arSystem = sceneEl.systems["mindar-system"];
+    useEffect(() => {
+        const sceneEl = sceneRef.current;
+        const arSystem = sceneEl.systems["mindar-system"];
 
-    sceneEl.addEventListener("renderstart", () => {
-      arSystem.start(); // start AR
-    });
-    return () => {
-      arSystem.stop();
-    };
-  }, []);
+        sceneEl.addEventListener("renderstart", () => {
+            arSystem.start(); // start AR
+        });
+        return () => {
+            arSystem.stop();
+        };
+    }, []);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      let productos = await db.collection("productosParaEscanear").get();
-      return productos.docs.map((producto) => producto.data());
-    };
+    useEffect(() => {
+        const getProducts = async () => {
+            let productos = await db.collection("productosParaEscanear").get();
+            return productos.docs.map((producto) => producto.data());
+        };
 
-    getProducts().then((data) => {
-      setProductos(data);
-    });
-  }, []);
+        getProducts().then((data) => {
+            setProductos(data);
+        });
+    }, []);
 
-  useEffect(() => {
-    productos.map((producto) => {
-      const tag = document.getElementById(producto.name);
-      tag.addEventListener("targetFound", (event) => {
-        console.log(
-          `encontre el producto y el Nombre es:
-                    ${event.target.id} y los puntos son : ${producto.points}`
-        );
-        db.collection("users")
-          .doc(currentUser.uid)
-          .get()
-          .then((res) => res.data().points + producto.points)
-          .then((data) => {
-            db.collection("users").doc(currentUser.uid).update({
-              points: data,
+    useEffect(() => {
+        productos.map((producto) => {
+            const tag = document.getElementById(producto.name);
+            tag.addEventListener("targetFound", (event) => {
+                db.collection("users")
+                    .doc(currentUser.uid)
+                    .get()
+                    .then((res) => {
+                        return res.data();
+                    })
+                    .then(async (data) => {
+                        let puntos = data.points + producto.points;
+                        let productosAverificar = data.productosYaEscaneados;
+                        let arr = productosAverificar.split(",");
+                        if (arr.includes(event.target.id)) {
+                            puntos = data.points;
+                            console.log(
+                                "Ya escaneaste este producto , si queres sumar mas puntos proba en escanear otro"
+                            );
+                        } else {
+                            console.log(
+                                `encontre el producto y el Nombre es:
+                                ${event.target.id} y los puntos son : ${producto.points}`
+                            );
+                            arr.push(event.target.id);
+                            let palabra = arr.toString();
+                            db.collection("users").doc(currentUser.uid).update({
+                                points: puntos,
+                                productosYaEscaneados: palabra,
+                            });
+                        }
+                    });
             });
-          });
-      });
-    });
-  }, [productos]);
+        });
+    }, [productos]);
 
   return (
     <a-scene
