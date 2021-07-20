@@ -34,6 +34,7 @@ const SingUp = () => {
                                 avatar: "https://i.stack.imgur.com/frlIf.png",
                                 points: 0,
                                 name: user.displayName,
+                                productosYaEscaneados: "valorDefault",
                             })
                             .then((res) => history.push("/"));
                     })
