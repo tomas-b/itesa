@@ -34,13 +34,6 @@ const Home = () => {
         </div>
         <div className={s.search}>
           <Search query={query} searchExercises={searchExercises} onChange={onChange} />
-          {searching && (
-            <div className={s.btn_wrapper}>
-              <button className={s.btn} onClick={() => setSearching(false)}>
-                Volver
-              </button>
-            </div>
-          )}
         </div>
         {!searching && (
           <div>
@@ -61,6 +54,11 @@ const Home = () => {
             ) : (
               <Card setCurrentExercise={setCurrentExercise} exercise={found} />
             )}
+            <div className={s.btn_wrapper}>
+              <button className={s.btn} onClick={() => setSearching(false)}>
+                Volver
+              </button>
+            </div>
           </div>
         )}
       </div>
