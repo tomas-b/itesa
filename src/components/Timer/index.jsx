@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import S from "./styles.module.css";
+import { Link } from 'react-router-dom';
 
 const debounce = (fn, timeout = 100) => {
   let timer;
@@ -15,7 +16,9 @@ const Timer = ({ show }) => {
       <div className={S.timer_wrapper}>
         <h3>Cuántas repeticiones?</h3>
         <Dial />
+        <Link to={`/poses/0`}>
         <button>Empezar</button>
+        </Link>
       </div>
     )
   );
