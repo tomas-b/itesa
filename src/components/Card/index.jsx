@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import s from "./style.module.css";
 
 const Card = ({ exercise, setCurrentExercise }) => {
-  console.log("exercise", exercise);
   return (
     <div className={s.card}>
       <div className={s.title}>{exercise.name}</div>

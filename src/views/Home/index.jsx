@@ -15,7 +15,8 @@ import s from "./style.module.css";
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
   const setCurrentExercise = useSetRecoilState(currentExerciseState);
-  const { query, searching, found, searchExercises, onChange, message } = useSearch();
+  const { query, searching, setSearching, found, searchExercises, onChange, message } =
+    useSearch();
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -53,6 +54,11 @@ const Home = () => {
             ) : (
               <Card setCurrentExercise={setCurrentExercise} exercise={found} />
             )}
+            <div className={s.btn_wrapper}>
+              <button className={s.btn} onClick={() => setSearching(false)}>
+                Volver
+              </button>
+            </div>
           </div>
         )}
       </div>
