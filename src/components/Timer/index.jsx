@@ -16,7 +16,7 @@ const Timer = ({ show }) => {
       <div className={S.timer_wrapper}>
         <h3>Cuántas repeticiones?</h3>
         <Dial />
-        <Link to={`/poses`}>
+        <Link to={`/poses/0`}>
         <button>Empezar</button>
         </Link>
       </div>

@@ -2,13 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import FastAverageColor from 'fast-average-color';
 // import * as tf from "@tensorflow/tfjs";
 // import * as tmPose from "@teachablemachine/pose";
+import { useParams } from 'react-router-dom'
 import S from './styles.module.css'
 
 const fac = new FastAverageColor();
 
 const Poses = () => {
 
-  const URL = "https://teachablemachine.withgoogle.com/models/9DHjJje2y/";
+  let excercises = [{name: 'curl', model: '9DHjJje2y'}, {name: 'circulito', model:'GnNXiBIym'}]
+
+  let modelId = excercises[ useParams().id ].model
+
+  const URL = `https://teachablemachine.withgoogle.com/models/${modelId}/`;
   let [model, setModel] = useState(null)
   let [webcam, setWebcam] = useState(null)
   let [run, setRun] = useState(false)
