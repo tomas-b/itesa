@@ -34,6 +34,7 @@ const useSearch = () => {
   return {
     query,
     searching,
+    setSearching,
     found,
     searchExercises,
     onChange,

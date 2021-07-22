@@ -60,8 +60,28 @@
 
 .search_results_container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding-top: 2rem;
+}
+
+.btn_wrapper {
+  position: relative;
+  margin-top: 30px;
+  padding: 10px;
+  padding-bottom: 40px;
+  align-self: flex-end;
+}
+
+.btn {
+  background: var(--main-btn-bg);
+  color: var(--main-btn-cl);
+  padding: 10px 20px;
+  margin: 0 -20px;
+  border-radius: 35px;
+  box-shadow: rgba(0, 0, 0, 0.9);
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
 }
 
 .title {
