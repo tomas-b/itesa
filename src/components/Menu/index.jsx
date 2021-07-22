@@ -14,7 +14,6 @@ export const showMenuState = atom({
 
 const Menu = () => {
   let [showMenu, setShowMenu] = useRecoilState(showMenuState);
-  console.log("show menu en Menu", showMenu);
 
   let animation = useSpring({
     to: showMenu
@@ -41,7 +40,7 @@ const Menu = () => {
             <Link to="/">ENTRENAMIENTO</Link>
           </li>
           <li>
-            <Link to="/">SUMÁ PUNTOS</Link>
+            <Link to="/points">SUMÁ PUNTOS</Link>
           </li>
           <li>
             <Link to="/perfil">MI PERFIL</Link>

@@ -5,6 +5,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+*:focus {
+    outline: none;
+}
+
 body {
   height: 100vh;
   height: -webkit-fill-available;
