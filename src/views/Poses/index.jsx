@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import FastAverageColor from 'fast-average-color';
 // import * as tf from "@tensorflow/tfjs";
 // import * as tmPose from "@teachablemachine/pose";
+import Header from "../../components/Header"
 import { useParams } from 'react-router-dom'
 import S from './styles.module.css'
 
@@ -129,6 +130,8 @@ const Poses = () => {
   }
 
   return (
+    <>
+    <Header/>
     <div className={S.container} style={{backgroundColor: avgColor}}>
       <canvas id="canvas" ref={canvasRef}></canvas>
       <div id="label-container">
@@ -140,6 +143,7 @@ const Poses = () => {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
