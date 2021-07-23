@@ -5,7 +5,16 @@ export const getExercises = async () => {
   return exercises.docs.map((exercise) => exercise.data());
 };
 
+export const getExercisesInCategory = async (category) => {
+  const exercises = await db
+    .collection("exercises")
+    .where("category", "array-contains", category)
+    .get();
+
+  return exercises.docs.map((exercise) => exercise.data());
+};
+
 export const getCategories = async () => {
-  let categories = await db.collection("categories").get();
+  const categories = await db.collection("categories").get();
   return categories.docs.map((category) => category.data());
 };
