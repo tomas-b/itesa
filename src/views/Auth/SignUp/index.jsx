@@ -27,6 +27,7 @@ const SingUp = () => {
     auth
       .createUserWithEmailAndPassword(form.email, form.password)
       .then(({ user }) => {
+        setMessage("Registrado correctamente");
         user
           .updateProfile({
             displayName: form.name,
@@ -36,8 +37,7 @@ const SingUp = () => {
               .doc(user.uid)
               .set({
                 gender: form.gender,
-                avatar:
-                  "https://static1.abc.es/media/play/2020/09/29/avatar-kE4H--1200x630@abc.jpeg",
+                avatar: "http://placeimg.com/200/200/animals",
                 points: 0,
                 name: user.displayName,
                 productosYaEscaneados: "valorDefault",
@@ -72,7 +72,7 @@ const SingUp = () => {
         else setMessage("");
         break;
       case "password":
-        if (!validator.isStrongPassword(value, { minLength: 6 }))
+        if (value && value.length <= 6)
           setMessage("La contraseña debe contener al menos 6 caracteres");
         else setMessage("");
         break;
