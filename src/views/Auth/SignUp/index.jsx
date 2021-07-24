@@ -62,9 +62,11 @@ const SingUp = () => {
     if (e.target.type === "checkbox") value = e.target.checked;
     setForm({ ...form, [name]: value });
 
+    if (validator.isEmpty(value)) setMessage("Por favor completar todos los campos");
+
     switch (name) {
       case "name":
-        if (!validator.isAlpha(value)) setMessage("Nombre invalido");
+        if (!validator.isAlpha(value)) setMessage("Por favor ingresa un nombre valido");
         else setMessage("");
         break;
       case "email":
@@ -72,15 +74,12 @@ const SingUp = () => {
         else setMessage("");
         break;
       case "password":
-        if (value && value.length <= 6)
+        if (value.length <= 6)
           setMessage("La contraseña debe contener al menos 6 caracteres");
         else setMessage("");
         break;
       default:
-        if (validator.isEmpty(value)) setMessage("Por favor completar todos los campos");
-        else {
-          setMessage("");
-        }
+        setMessage("");
     }
   };
 
