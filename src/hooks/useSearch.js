@@ -15,7 +15,6 @@ const useSearch = () => {
   }, []);
 
   const searchExercises = (e) => {
-    console.log("query", query);
     if (e.key === "Enter") {
       setSearching(true);
       if (query === "") {
