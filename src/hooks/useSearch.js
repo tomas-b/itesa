@@ -12,6 +12,7 @@ const useSearch = () => {
 
   useEffect(() => {
     getExercises().then((exercises) => setExercises(exercises));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchExercises = (e) => {
