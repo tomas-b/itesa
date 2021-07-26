@@ -67,7 +67,7 @@ const LogIn = () => {
         />
         <div>
           ¿Has olvidado tu contraseña?
-          <a href="#">Recuperar</a>
+          <a href="/">Recuperar</a>
         </div>
         <input type="submit" value="INGRESAR" />
         <div>
