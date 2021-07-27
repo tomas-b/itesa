@@ -171,6 +171,7 @@ const Poses = () => {
   };
 
   return (
+    <>
     <div>
       <div className={S.container} style={{ backgroundColor: avgColor }}>
         <p>Reps: {reps}</p>
@@ -189,6 +190,7 @@ const Poses = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

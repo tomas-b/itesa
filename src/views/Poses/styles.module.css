@@ -1,9 +1,9 @@
 .container {
-  height: 100vh;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.5s;
+	height: calc(100vh - 82px);
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	transition: background-color .5s;
 }
 
 .bar {
