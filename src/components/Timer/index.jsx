@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import S from "./styles.module.css";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from 'recoil';
+import { currentExerciseState } from "../../data/currentExercise";
 
 const debounce = (fn, timeout = 100) => {
   let timer;
@@ -18,7 +20,7 @@ const Timer = ({ show }) => {
       <div className={S.timer_wrapper}>
         <h3>Cuántas repeticiones?</h3>
         <Dial />
-        <Link to={`/poses/0`}>
+        <Link to={`/poses`}>
           <button>Empezar</button>
         </Link>
       </div>
@@ -35,8 +37,10 @@ const Timer = ({ show }) => {
 
 const Dial = () => {
   let dialRef = useRef();
-  const [reps, setReps] = useState(0);
-  const [selectedNum, setSelectedNum] = useState("");
+  // const [reps, setReps] = useState(0);
+  // const [selectedNum, setSelectedNum] = useState("");
+  const setCurrentExercise = useSetRecoilState(currentExerciseState);
+
 
   useEffect(() => {
     dialRef.current.addEventListener(
@@ -56,7 +60,7 @@ const Dial = () => {
 
         let middle = document.elementFromPoint(x_, y_)
         if(middle) {
-          setSelectedNum(middle.innerText);
+          setCurrentExercise( exc => ({...exc, reps: middle.innerText}) );
           middle.classList.add(S.selected);
         }
       })

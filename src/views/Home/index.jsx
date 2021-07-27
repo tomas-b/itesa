@@ -3,7 +3,7 @@ import { AuthContext } from "../../Auth";
 import { useSetRecoilState } from "recoil";
 
 import { getCategories } from "../../data/firestoreQueries";
-import { currentExerciseState } from "../Categories";
+import { currentExerciseState } from "../../data/currentExercise";
 import useSearch from "../../hooks/useSearch";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";

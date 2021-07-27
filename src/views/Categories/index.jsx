@@ -10,11 +10,7 @@ import Header from "../../components/Header";
 import Card from "../../components/Card";
 import Search from "../../components/Search";
 import s from "./style.module.css";
-
-export const currentExerciseState = atom({
-  key: "currentExerciseState",
-  default: {},
-});
+import { currentExerciseState } from '../../data/currentExercise';
 
 export const exercisesState = atom({
   key: "exercisesState",

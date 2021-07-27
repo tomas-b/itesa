@@ -4,16 +4,21 @@ import FastAverageColor from "fast-average-color";
 // import * as tmPose from "@teachablemachine/pose";
 import { useParams } from "react-router-dom";
 import S from "./styles.module.css";
+import { useRecoilValue } from 'recoil';
+import { currentExerciseState } from "../../data/currentExercise";
 
 const fac = new FastAverageColor();
 
 const Poses = () => {
+
+  
+
   let excercises = [
     { name: "curl", model: "9DHjJje2y" },
     { name: "circulito", model: "GnNXiBIym" },
   ];
 
-  let modelId = excercises[useParams().id].model;
+  let modelId = excercises[0].model;
 
   const URL = `https://teachablemachine.withgoogle.com/models/${modelId}/`;
   let [model, setModel] = useState(null);
@@ -24,11 +29,16 @@ const Poses = () => {
   let [class2, setClass2] = useState(0);
   let [avgColor, setAvgColor] = useState("#000");
   const [reps, setReps] = useState(0);
+  const currentExercise = useRecoilValue( currentExerciseState )
 
   let w = window.innerWidth;
   let h = window.innerHeight;
 
   let canvasRef = useRef();
+
+  useEffect(()=>{
+    setReps( currentExercise.reps )
+  }, [currentExercise])
 
   let init = async () => {
     const modelURL = URL + "model.json";
@@ -111,10 +121,10 @@ const Poses = () => {
     // Voy bajando (down es class1)
     if (prediction[0].probability > 0.8 && !down) {
       setReps((reps) => {
-        if (reps > 4) {
-          finished();
-        }
-        return reps + 1;
+        // if (reps > 4) {
+        //   finished();
+        // }
+        return reps - 1;
       });
       down = true;
       up = false;
