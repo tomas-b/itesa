@@ -18,3 +18,7 @@ export const getCategories = async () => {
   const categories = await db.collection("categories").get();
   return categories.docs.map((category) => category.data());
 };
+
+export const getUser = async (id) => {
+  return db.collection("users").doc(id).get();
+};
