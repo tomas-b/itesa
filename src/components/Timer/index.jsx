@@ -42,12 +42,23 @@ const Dial = () => {
     dialRef.current.addEventListener(
       "scroll",
       debounce(() => {
+
+        let { top, height } = dialRef.current
+          .querySelector("li")
+          .getBoundingClientRect();
+
         let x_ = dialRef.current.getBoundingClientRect().width / 2;
-        let { top, height } = dialRef.current.querySelector("li").getBoundingClientRect();
         let y_ = top + height / 2;
-        setSelectedNum(dialRef.current.getElementsByClassName(S.selected)[0]);
-        selectedNum?.classList.remove(S.selected);
-        document.elementFromPoint(x_, y_)?.classList.add(S.selected);
+
+        dialRef.current
+          .getElementsByClassName(S.selected)[0]
+          ?.classList.remove(S.selected);
+
+        let middle = document.elementFromPoint(x_, y_)
+        if(middle) {
+          setSelectedNum(middle.innerText);
+          middle.classList.add(S.selected);
+        }
       })
     );
   }, []); // [window.innerWidth]);
