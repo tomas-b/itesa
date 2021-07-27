@@ -124,8 +124,8 @@ const SingUp = () => {
           <input type="checkbox" name="ToS" required />
           <label htmlFor="ToS">
             Acepto la
-            <a href="#">política de privacidad</a>y los
-            <a href="#">terminos y condiciones de uso</a>y Activaciones de Marketing.
+            <a href="/">política de privacidad</a>y los
+            <a href="/">terminos y condiciones de uso</a>y Activaciones de Marketing.
           </label>
         </div>
         <input type="submit" value="REGISTRARME" />
