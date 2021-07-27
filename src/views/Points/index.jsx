@@ -7,11 +7,9 @@ import s from "./style.module.css";
 const Points = () => {
   return (
     <div>
-      <BurgerMenu />
-      <div className={s.App}>
-        <div className={s.container}>
-          <Arjs />
-        </div>
+      <BurgerMenu className={s.back}/>
+      <div className={s.container}>
+        <Arjs />
       </div>
     </div>
   );
