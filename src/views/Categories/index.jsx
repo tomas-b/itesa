@@ -2,18 +2,15 @@ import { useParams } from "react-router";
 import React, { useEffect } from "react";
 import { atom, useSetRecoilState, useRecoilState } from "recoil";
 
-import { getExercises } from "../../data/firestoreQueries";
+import { capitalize } from "../../utils";
+import { getExercisesInCategory } from "../../data/firestoreQueries";
 import useSearch from "../../hooks/useSearch";
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
 import Card from "../../components/Card";
 import Search from "../../components/Search";
 import s from "./style.module.css";
-
-export const currentExerciseState = atom({
-  key: "currentExerciseState",
-  default: {},
-});
+import { currentExerciseState } from '../../data/currentExercise';
 
 export const exercisesState = atom({
   key: "exercisesState",
@@ -29,9 +26,10 @@ const Categories = () => {
   let { name } = useParams();
 
   useEffect(() => {
-    getExercises().then((exercises) => {
+    getExercisesInCategory(name).then((exercises) => {
       setExercises(exercises);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -43,7 +41,7 @@ const Categories = () => {
           <Search query={query} searchExercises={searchExercises} onChange={onChange} />
         </div>
         <div className={s.title}>
-          <h2>Descubre todos los ejercicios de {name}</h2>
+          <h2>Descubre todos los ejercicios de {capitalize(name)}</h2>
         </div>
         {!searching && (
           <div className={s.grid}>

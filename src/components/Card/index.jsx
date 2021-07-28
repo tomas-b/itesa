@@ -18,9 +18,9 @@ const Card = ({ exercise, setCurrentExercise }) => {
       </div>
       <div className={s.btn_wrapper}>
         <Link
-          to={`/tutorial/${exercise.id}`}
+          to={`/tutorial/`}
           className={s.btn}
-          onClick={() => setCurrentExercise(exercise)}
+          onClick={() => console.log(exercise) | setCurrentExercise(exercise)}
         >
           Ver Tutorial
         </Link>
