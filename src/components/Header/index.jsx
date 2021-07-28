@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
-import { userState } from "../../views/UserProfile";
+import { userState } from "../../views/Home";
 import BurgerMenu from "../BurgerMenu";
 import S from "./styles.module.css";
 
