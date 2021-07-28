@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Auth";
+import { useRecoilValue } from "recoil";
 
-import { db } from "../../base";
+import { userState } from "../Home";
+import { capitalize } from "../../utils";
 import BurgerMenu from "../../components/BurgerMenu";
 import S from "./style.module.css";
 
@@ -19,10 +19,11 @@ const UserProfile = () => {
         setExercises(res.data().ejerciciosRealizados);
       });
   }, []);
+  const user = useRecoilValue(userState);
 
   return (
     <div>
-      <div>
+      <div className={S.menu}>
         <BurgerMenu />
       </div>
       <div className={S.grid_wrapper}>
@@ -33,22 +34,21 @@ const UserProfile = () => {
           />
           <span className={S.small_text}>Cambiar</span>
         </div>
-        <div className={S.name_container}>
-          <div className={S.name}>{currentUser.displayName.toUpperCase()}</div>
-          <div className={S.email}>{currentUser.email}</div>
+        <div className={S.avatar} style={{ backgroundImage: `url(${user.avatar})` }} />
+        <div>
+          <div className={S.displayName}>{capitalize(user.name)}</div>
+          <div className={S.email}>{user.email}</div>
         </div>
-        <div className={S.info_container}>
-          {/* <button className={S.button}>Ver Historial</button> */}
-          <div>{info.gender === "M" ? <p>Hombre</p> : <p>Mujer</p>}</div>
-          <div
-            className={S.point_container}
-          >{`Tenes ${info.points} Puntos`}</div>
-          <div>{"Ejercicios:"}</div>
-          {exercises.map((ejercicio, index) => (
-            <div key={index}>
-              <p>{ejercicio}</p>
-            </div>
-          ))}
+      </div>
+      <div className={S.stats}>
+        {/* <div>{user.gender === "M" ? <p>Hombre</p> : <p>Mujer</p>}</div> */}
+        <div className={S.box}>
+          <div className={S.title}>Puntos</div>
+          <div>{user.points}</div>
+        </div>
+        <div className={S.box}>
+          <div className={S.title}>Workouts</div>
+          <div>0</div>
         </div>
       </div>
     </div>

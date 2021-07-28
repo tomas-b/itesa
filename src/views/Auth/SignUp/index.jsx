@@ -37,7 +37,7 @@ const SingUp = () => {
               .doc(user.uid)
               .set({
                 gender: form.gender,
-                avatar: "http://placeimg.com/200/200/animals",
+                avatar: `https://picsum.photos/seed/${user.uid}/200/300`,
                 points: 0,
                 name: user.displayName,
                 productosYaEscaneados: "valorDefault",
@@ -128,9 +128,8 @@ const SingUp = () => {
           <input type="checkbox" name="ToS" required />
           <label htmlFor="ToS">
             Acepto la
-            <a href="#">política de privacidad</a>y los
-            <a href="#">terminos y condiciones de uso</a>y Activaciones de
-            Marketing.
+            <a href="/">política de privacidad</a>y los
+            <a href="/">terminos y condiciones de uso</a>y Activaciones de Marketing.
           </label>
         </div>
         <input type="submit" value="REGISTRARME" />
