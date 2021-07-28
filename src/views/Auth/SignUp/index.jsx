@@ -41,6 +41,7 @@ const SingUp = () => {
                 points: 0,
                 name: user.displayName,
                 productosYaEscaneados: "valorDefault",
+                ejerciciosRealizados: [],
               })
               .then((res) => history.push("/"));
           })
@@ -62,15 +63,18 @@ const SingUp = () => {
     if (e.target.type === "checkbox") value = e.target.checked;
     setForm({ ...form, [name]: value });
 
-    if (validator.isEmpty(value)) setMessage("Por favor completar todos los campos");
+    if (validator.isEmpty(value))
+      setMessage("Por favor completar todos los campos");
 
     switch (name) {
       case "name":
-        if (!validator.isAlpha(value)) setMessage("Por favor ingresa un nombre valido");
+        if (!validator.isAlpha(value))
+          setMessage("Por favor ingresa un nombre valido");
         else setMessage("");
         break;
       case "email":
-        if (!validator.isEmail(value)) setMessage("Por favor ingresa un email valido");
+        if (!validator.isEmail(value))
+          setMessage("Por favor ingresa un email valido");
         else setMessage("");
         break;
       case "password":
@@ -125,7 +129,8 @@ const SingUp = () => {
           <label htmlFor="ToS">
             Acepto la
             <a href="#">política de privacidad</a>y los
-            <a href="#">terminos y condiciones de uso</a>y Activaciones de Marketing.
+            <a href="#">terminos y condiciones de uso</a>y Activaciones de
+            Marketing.
           </label>
         </div>
         <input type="submit" value="REGISTRARME" />

@@ -63,3 +63,7 @@
   -webkit-appearance: none;
   border-radius: 0;
 }
+
+.point_container{
+  background-color: #e881ff;
+}
