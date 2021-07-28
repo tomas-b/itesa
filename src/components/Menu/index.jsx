@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import base from "../../base";
 import S from "./styles.module.css";
+import { useLocation } from "react-router-dom";
 
 export const showMenuState = atom({
   key: "showMenu",
@@ -26,6 +27,12 @@ const Menu = () => {
     base.auth().signOut();
   };
 
+  let refresh = ["/points"].includes(useLocation().pathname);
+
+  let linkClick = (url) => {
+    if (refresh) window.location = url;
+  };
+
   return (
     <a.div className={S.menu_wrapper} style={animation}>
       <div className={S.menu_container}>
@@ -34,16 +41,24 @@ const Menu = () => {
         </div>
         <ul onClick={() => setShowMenu(false)}>
           <li>
-            <Link to="/">INICIO</Link>
+            <Link onClick={() => linkClick("/")} to="/">
+              INICIO
+            </Link>
           </li>
           <li>
-            <Link to="/">ENTRENAMIENTO</Link>
+            <Link onClick={() => linkClick("/")} to="/">
+              ENTRENAMIENTO
+            </Link>
           </li>
           <li>
-            <Link to="/points">SUMÁ PUNTOS</Link>
+            <Link onClick={() => linkClick("/points")} to="/points">
+              SUMÁ PUNTOS
+            </Link>
           </li>
           <li>
-            <Link to="/perfil">MI PERFIL</Link>
+            <Link onClick={() => linkClick("/perfil")} to="/perfil">
+              MI PERFIL
+            </Link>
           </li>
         </ul>
         <div className={S.logout_wrapper}>
