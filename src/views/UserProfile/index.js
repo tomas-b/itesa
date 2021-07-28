@@ -6,19 +6,6 @@ import BurgerMenu from "../../components/BurgerMenu";
 import S from "./style.module.css";
 
 const UserProfile = () => {
-  let [info, setInfo] = useState("");
-  const { currentUser } = useContext(AuthContext);
-  let [exercises, setExercises] = useState([]);
-
-  useEffect(() => {
-    db.collection("users")
-      .doc(currentUser.uid)
-      .get()
-      .then((res) => {
-        setInfo(res.data());
-        setExercises(res.data().ejerciciosRealizados);
-      });
-  }, []);
   const user = useRecoilValue(userState);
 
   return (
@@ -30,11 +17,10 @@ const UserProfile = () => {
         <div className={S.avatar_container}>
           <div
             className={S.avatar}
-            style={{ backgroundImage: `url(${info.avatar})` }}
+            style={{ backgroundImage: `url(${user.avatar})` }}
           />
           <span className={S.small_text}>Cambiar</span>
         </div>
-        <div className={S.avatar} style={{ backgroundImage: `url(${user.avatar})` }} />
         <div>
           <div className={S.displayName}>{capitalize(user.name)}</div>
           <div className={S.email}>{user.email}</div>
