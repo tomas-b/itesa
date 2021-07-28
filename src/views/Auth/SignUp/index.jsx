@@ -37,7 +37,7 @@ const SingUp = () => {
               .doc(user.uid)
               .set({
                 gender: form.gender,
-                avatar: "http://placeimg.com/200/200/animals",
+                avatar: `https://picsum.photos/seed/${user.uid}/200/300`,
                 points: 0,
                 name: user.displayName,
                 productosYaEscaneados: "valorDefault",
