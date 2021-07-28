@@ -1,14 +1,18 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import S from "./styles.module.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useSetRecoilState } from 'recoil';
+import { currentExerciseState } from "../../data/currentExercise";
 
 const debounce = (fn, timeout = 100) => {
   let timer;
   return (...args) => {
     clearTimeout(timer);
-    timer = setTimeout(() => { fn.apply(this, args); }, timeout);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, timeout);
   };
-}
+};
 
 const Timer = ({ show }) => {
   return (
@@ -16,28 +20,51 @@ const Timer = ({ show }) => {
       <div className={S.timer_wrapper}>
         <h3>Cuántas repeticiones?</h3>
         <Dial />
-        <Link to={`/poses/0`}>
-        <button>Empezar</button>
+        <Link to={`/poses`}>
+          <button>Empezar</button>
         </Link>
       </div>
     )
   );
 };
 
+/*
+ dialRef.current
+          .getElementsByClassName(S.selected)[0]
+          ?.classList.remove(S.selected);
+        document.elementFromPoint(x_, y_)?.classList.add(S.selected);
+*/
+
 const Dial = () => {
   let dialRef = useRef();
+  // const [reps, setReps] = useState(0);
+  // const [selectedNum, setSelectedNum] = useState("");
+  const setCurrentExercise = useSetRecoilState(currentExerciseState);
+
 
   useEffect(() => {
+    dialRef.current.addEventListener(
+      "scroll",
+      debounce(() => {
 
+        let { top, height } = dialRef.current
+          .querySelector("li")
+          .getBoundingClientRect();
 
-    dialRef.current.addEventListener("scroll", debounce(() => {
-			let x_ = dialRef.current.getBoundingClientRect().width / 2
-			let {top, height} = dialRef.current.querySelector('li').getBoundingClientRect()
-			let y_ = top + height / 2
-			dialRef.current.getElementsByClassName(S.selected)[0]?.classList.remove(S.selected)
-			document.elementFromPoint(x_, y_)?.classList.add(S.selected)
-		}))
+        let x_ = dialRef.current.getBoundingClientRect().width / 2;
+        let y_ = top + height / 2;
 
+        dialRef.current
+          .getElementsByClassName(S.selected)[0]
+          ?.classList.remove(S.selected);
+
+        let middle = document.elementFromPoint(x_, y_)
+        if(middle) {
+          setCurrentExercise( exc => ({...exc, reps: middle.innerText}) );
+          middle.classList.add(S.selected);
+        }
+      })
+    );
   }, []); // [window.innerWidth]);
 
   return (

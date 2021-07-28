@@ -1,6 +1,5 @@
 .grid {
   grid-area: cards;
-  align-self: center;
   max-width: 100vw;
 }
 
@@ -115,7 +114,7 @@
 .item {
   width: 80%;
   height: 90%;
-  margin: 4%;
+  margin: 3%;
   flex-shrink: 0;
   scroll-snap-align: center;
   /* background:red; */
