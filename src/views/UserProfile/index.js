@@ -1,40 +1,59 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Auth";
+import { atom, useRecoilState } from "recoil";
 
-import { db } from "../../base";
+import { getUser } from "../../data/firestoreQueries";
 import BurgerMenu from "../../components/BurgerMenu";
 import S from "./style.module.css";
+import { capitalize } from "../../utils";
+
+export const userState = atom({
+  key: "user",
+  default: {
+    id: "",
+    name: "",
+    email: "",
+    avatar: "",
+    gender: "",
+    points: 0,
+    productosYaEscaneados: "",
+  },
+});
 
 const UserProfile = () => {
-  let [info, setInfo] = useState("");
+  let [user, setUser] = useRecoilState(userState);
   const { currentUser } = useContext(AuthContext);
 
+  // Traer la info del usuario de firebase y guardarla en recoil
   useEffect(() => {
-    db.collection("users")
-      .doc(currentUser.uid)
-      .get()
-      .then((res) => setInfo(res.data()));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    getUser(currentUser.uid).then((res) => {
+      const userInfo = res.data();
+      setUser({ ...userInfo, email: currentUser.email, id: currentUser.uid });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
       <div>
-        <BurgerMenu />
-      </div>
-      <div className={S.grid_wrapper}>
-        <div className={S.avatar_container}>
-          <div className={S.avatar} style={{ backgroundImage: `url(${info.avatar})` }} />
-          <span className={S.small_text}>Cambiar</span>
+        <div className={S.menu}>
+          <BurgerMenu />
         </div>
-        <div className={S.name_container}>
-          <div className={S.name}>{currentUser.displayName.toUpperCase()}</div>
+        <div className={S.avatar} style={{ backgroundImage: `url(${user.avatar})` }} />
+        <div>
+          <div className={S.displayName}>{capitalize(currentUser.displayName)}</div>
           <div className={S.email}>{currentUser.email}</div>
         </div>
-        <div className={S.info_container}>
-          {/* <button className={S.button}>Ver Historial</button> */}
-          <div>{info.gender === "M" ? <p>Hombre</p> : <p>Mujer</p>}</div>
-          <div>{`Tenes ${info.points} Puntos`}</div>
+      </div>
+      <div className={S.stats}>
+        {/* <div>{user.gender === "M" ? <p>Hombre</p> : <p>Mujer</p>}</div> */}
+        <div className={S.box}>
+          <div className={S.title}>Puntos</div>
+          <div>{user.points}</div>
+        </div>
+        <div className={S.box}>
+          <div className={S.title}>Workouts</div>
+          <div>0</div>
         </div>
       </div>
     </div>
