@@ -41,22 +41,28 @@ const Menu = () => {
         </div>
         <ul onClick={() => setShowMenu(false)}>
           <li>
-            <Link onClick={() => linkClick("/")} to="/">
+            <Link onClick={() => linkClick("/")} to={refresh ? "#" : "/"}>
               INICIO
             </Link>
           </li>
           <li>
-            <Link onClick={() => linkClick("/")} to="/">
+            <Link onClick={() => linkClick("/")} to={refresh ? "#" : "/"}>
               ENTRENAMIENTO
             </Link>
           </li>
           <li>
-            <Link onClick={() => linkClick("/points")} to="/points">
+            <Link
+              onClick={() => linkClick("/points")}
+              to={refresh ? "#" : "/points"}
+            >
               SUMÁ PUNTOS
             </Link>
           </li>
           <li>
-            <Link onClick={() => linkClick("/perfil")} to="/perfil">
+            <Link
+              onClick={() => linkClick("/perfil")}
+              to={refresh ? "#" : "/perfil"}
+            >
               MI PERFIL
             </Link>
           </li>
