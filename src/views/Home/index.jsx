@@ -23,6 +23,7 @@ export const userState = atom({
     gender: "",
     points: 0,
     productosYaEscaneados: "",
+    ejerciciosRealizados: []
   },
 });
 

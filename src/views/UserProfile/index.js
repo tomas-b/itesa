@@ -19,7 +19,6 @@ const UserProfile = () => {
             className={S.avatar}
             style={{ backgroundImage: `url(${user.avatar})` }}
           />
-          <span className={S.small_text}>Cambiar</span>
         </div>
         <div>
           <div className={S.displayName}>{capitalize(user.name)}</div>
@@ -34,7 +33,14 @@ const UserProfile = () => {
         </div>
         <div className={S.box}>
           <div className={S.title}>Workouts</div>
-          <div>0</div>
+          {console.log("HOLAAAAA", user)}
+          {user.ejerciciosRealizados.length ? (
+            user.ejerciciosRealizados.map((ejercicio, index) => (
+              <div key={index}>{ejercicio}</div>
+            ))
+          ) : (
+            <div>{user.ejerciciosRealizados.length}</div>
+          )}
         </div>
       </div>
     </div>
