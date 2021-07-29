@@ -7,7 +7,7 @@ import S from "./style.module.css";
 
 const UserProfile = () => {
   let user = useRecoilValue(userState);
-  if (!user.id.length) user = JSON.parse(localStorage.getItem("user"));
+  if (user.id === "") user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
