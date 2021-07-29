@@ -24,6 +24,9 @@ const Poses = () => {
   let [avgColor, setAvgColor] = useState("#000");
   const [reps, setReps] = useState(0);
   const currentExercise = useRecoilValue(currentExerciseState);
+  let [running, setRunning] = useState(false);
+  let countdown = useRef()
+  let startBtn = useRef()
 
   let w = window.innerWidth;
   // let h = window.innerHeight;
@@ -31,8 +34,10 @@ const Poses = () => {
   let canvasRef = useRef();
 
   useEffect(() => {
-    setReps(currentExercise.reps);
-  }, [currentExercise]);
+    if (currentExercise.reps === reps) {
+      finish();
+    }
+  }, [reps]);
 
   let init = async () => {
     const modelURL = URL + "model.json";
@@ -99,9 +104,7 @@ const Poses = () => {
 
     // Voy bajando (down es class1)
     if (prediction[0].probability > 0.8 && !down) {
-      setReps((reps) => {
-        return reps - 1;
-      });
+      setReps(reps => ++reps);
       down = true;
       up = false;
     }
@@ -148,25 +151,42 @@ const Poses = () => {
     
   };
 
+  let startTimer = () => {
+    startBtn.current.style.display = 'none';
+    countdown.current.style.display = 'block';
+    let cd = countdown.current;
+    setTimeout(()=>{ cd.innerText = '2' }, 1000)
+    setTimeout(()=>{ cd.innerText = '1' }, 2000)
+    setTimeout(()=>{ cd.innerText = '0' }, 3000)
+    setTimeout(()=>{ setRunning(true) }, 3200)
+  }
+
   return (
     <>
       <div>
-        <div className={S.ui_container}>
+        <div className={`${S.ui_container}  ${ running ? S.running : '' } `}>
           <div className={S.header}>
             <BurgerMenu />
             <p>class data: 123</p>
           </div>
 
           <div className={S.counter}>
+            { running ?
             <div>
               <h2>{reps}</h2>
-              <h3>Quedan 6</h3>
+              <h3>{currentExercise.reps - reps}</h3>
             </div>
+            :
+            <div className={S.countdown}>
+              <h2 ref={countdown}>3</h2>
+              <button ref={startBtn} onClick={()=>startTimer()}>Empezar</button>
+            </div>
+             }
           </div>
 
-          <div className={S.buttons}>
+          {running && <div className={S.buttons}>
             <button onClick={() => finish()}>Terminar</button>
-          </div>
+          </div>}
         </div>
 
         <div
