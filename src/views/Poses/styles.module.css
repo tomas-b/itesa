@@ -35,6 +35,18 @@
   opacity: .5
 }
 
+.countdown {
+  height: 20vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown h2 {
+  display: none;
+  font-size: 6em;
+}
+
 .buttons {
   height: 20vh;
   display: grid;
@@ -42,7 +54,7 @@
   align-items: center;
 }
 
-.buttons button {
+.buttons button, .countdown button {
   font-size: 1.3em;
   border: none;
   padding: 10px 20px;
