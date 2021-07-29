@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import FastAverageColor from "fast-average-color";
 // import * as tf from "@tensorflow/tfjs";
 // import * as tmPose from "@teachablemachine/pose";
-import { useParams } from "react-router-dom";
 import S from "./styles.module.css";
 import { useRecoilValue } from 'recoil';
 import { currentExerciseState } from "../../data/currentExercise";
@@ -23,8 +22,6 @@ const Poses = () => {
   const URL = `https://teachablemachine.withgoogle.com/models/${modelId}/`;
   let [model, setModel] = useState(null);
   let [webcam, setWebcam] = useState(null);
-  let [run, setRun] = useState(false);
-  let [maxPredictions, setMaxPredictions] = useState(null);
   let [class1, setClass1] = useState(0);
   let [class2, setClass2] = useState(0);
   let [avgColor, setAvgColor] = useState("#000");
@@ -49,7 +46,6 @@ const Poses = () => {
     let _model = await window.tmPose.load(modelURL, metadataURL);
     let _maxPredictions = _model.getTotalClasses();
     setModel(_model);
-    setMaxPredictions(_maxPredictions);
 
     // Convenience function to setup a webcam
     const flip = true; // whether to flip the webcam
@@ -74,7 +70,6 @@ const Poses = () => {
     //   labelContainer.appendChild(document.createElement("div"));
     // }
 
-    setRun(true);
   };
 
   useEffect(async () => {

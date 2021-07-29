@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
 import { db } from "../../../src/base";
 import { AuthContext } from "../../Auth";
@@ -21,7 +21,8 @@ const ARjs = () => {
   }, []);
 
   useEffect(() => {
-    productos.map((producto) => {
+    //CAMBIE MAP POR FOREACH PARA QUITAR UN WARNING
+    productos.forEach((producto) => {
       const tag = document.getElementById(producto.name);
       tag.addEventListener("markerFound", (event) => {
         db.collection("users")
@@ -50,7 +51,8 @@ const ARjs = () => {
           });
       });
     });
-  }, [productos]);
+    //AGREGUE currentUser.uid PARA QUITAR WARNING DE DEPENDENCIAS
+  }, [productos, currentUser.uid]);
   return (
     <div>
       <div className={s.container}>

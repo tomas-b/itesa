@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import S from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
@@ -65,7 +65,7 @@ const Dial = () => {
         }
       })
     );
-  }, []); // [window.innerWidth]);
+  }); // [window.innerWidth]);
 
   return (
     <div className={S.dial} ref={dialRef}>
