@@ -1,11 +1,33 @@
-.container {
-	height: calc(100vh - 82px);
+.canvas_container {
+	height: 100vh;
 	display: grid;
 	justify-content: center;
 	align-items: center;
 	transition: background-color .5s;
 }
 
+.ui_container {
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+}
+
+.header {
+  background-color: var(--reps-btn-bg);
+  opacity: 0.9;
+  color: white;
+  text-align: center;
+  border-radius: 0px 0px 10px 10px;
+  box-shadow: 0px 5px 5px rgba(0 0 0/.3);
+  z-index: 3;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: max-content;
+  padding: 20px;
+}
+
+
+/* 
 .bar {
   margin: 10px;
   border: 2px solid white;
@@ -31,4 +53,4 @@
 }
 .second div {
   background-color: red;
-}
+} */

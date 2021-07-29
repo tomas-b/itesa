@@ -5,8 +5,7 @@
 }
 
 .header {
-  background-color: var(--reps-btn-bg);
-  opacity: 0.9;
+  background-color: rgb(110 138 250 / .85); /* var(--reps-btn-bg) + opacity */
   color: white;
   text-align: center;
   border-radius: 0px 0px 10px 10px;
@@ -16,4 +15,8 @@
   grid-template-columns: min-content 1fr;
   grid-template-rows: max-content;
   padding: 20px;
+}
+
+.header svg {
+  color: white;
 }
