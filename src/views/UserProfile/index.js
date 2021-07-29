@@ -6,7 +6,8 @@ import BurgerMenu from "../../components/BurgerMenu";
 import S from "./style.module.css";
 
 const UserProfile = () => {
-  const user = useRecoilValue(userState);
+  let user = useRecoilValue(userState);
+  if (!user.id.length) user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
@@ -15,11 +16,7 @@ const UserProfile = () => {
       </div>
       <div className={S.grid_wrapper}>
         <div className={S.avatar_container}>
-          <div
-            className={S.avatar}
-            style={{ backgroundImage: `url(${user.avatar})` }}
-          />
-          <span className={S.small_text}>Cambiar</span>
+          <div className={S.avatar} style={{ backgroundImage: `url(${user.avatar})` }} />
         </div>
         <div>
           <div className={S.displayName}>{capitalize(user.name)}</div>

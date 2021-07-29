@@ -43,6 +43,18 @@ const Home = () => {
     getUser(currentUser.uid).then((res) => {
       const userInfo = res.data();
       setUser({ ...userInfo, email: currentUser.email, id: currentUser.uid });
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: userInfo.name,
+          email: currentUser.email,
+          avatar: userInfo.avatar,
+          gender: userInfo.gender,
+          points: userInfo.points,
+          productosYaEscaneados: userInfo.productosYaEscaneados,
+          ejerciciosRealizados: userInfo.ejerciciosRealizados,
+        })
+      );
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
