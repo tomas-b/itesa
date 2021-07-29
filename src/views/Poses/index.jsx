@@ -3,7 +3,9 @@ import FastAverageColor from "fast-average-color";
 import S from "./styles.module.css";
 import { useRecoilValue } from "recoil";
 import { currentExerciseState } from "../../data/currentExercise";
-import BurgerMenu from '../../components/BurgerMenu'
+import BurgerMenu from "../../components/BurgerMenu";
+import { userState } from "../Home";
+import { db } from "../../../src/base";
 
 const fac = new FastAverageColor();
 
@@ -11,7 +13,7 @@ const Poses = () => {
   let excercises = [
     { name: "curl", model: "9DHjJje2y" },
     { name: "circulito", model: "GnNXiBIym" },
-    { name: 'sentadillas', model: 'Bh8JyU6Vu' }
+    { name: "sentadillas", model: "Bh8JyU6Vu" },
   ];
 
   let modelId = excercises[0].model;
@@ -24,6 +26,10 @@ const Poses = () => {
   let [avgColor, setAvgColor] = useState("#000");
   const [reps, setReps] = useState(0);
   const currentExercise = useRecoilValue(currentExerciseState);
+  const currentUser = useRecoilValue(userState);
+  let [running, setRunning] = useState(false);
+  let countdown = useRef()
+  let startBtn = useRef()
 
   let w = window.innerWidth;
   // let h = window.innerHeight;
@@ -31,8 +37,10 @@ const Poses = () => {
   let canvasRef = useRef();
 
   useEffect(() => {
-    setReps(currentExercise.reps);
-  }, [currentExercise]);
+    if (currentExercise.reps === reps) {
+      finished();
+    }
+  }, [reps]);
 
   let init = async () => {
     const modelURL = URL + "model.json";
@@ -53,7 +61,7 @@ const Poses = () => {
 
     const canvas = canvasRef.current;
     canvas.width = w;
-    canvas.height = height / width * w;
+    canvas.height = (height / width) * w;
   };
 
   useEffect(() => {
@@ -71,7 +79,7 @@ const Poses = () => {
 
     let loop = async () => {
       try {
-        ctx.clearRect(0,0,ctx.width, ctx.height);
+        ctx.clearRect(0, 0, ctx.width, ctx.height);
         webcam.update();
         await predict();
       } catch (e) {
@@ -82,8 +90,7 @@ const Poses = () => {
 
     loop();
 
-    return () => clearInterval( bgColorTimer )
-
+    return () => clearInterval(bgColorTimer);
   }, [webcam?.update]);
 
   let up = false;
@@ -95,15 +102,12 @@ const Poses = () => {
   */
 
   let predict = async () => {
-
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     const prediction = await model.predict(posenetOutput);
 
     // Voy bajando (down es class1)
     if (prediction[0].probability > 0.8 && !down) {
-      setReps((reps) => {
-        return reps - 1;
-      });
+      setReps(reps => ++reps);
       down = true;
       up = false;
     }
@@ -128,39 +132,83 @@ const Poses = () => {
 
     if (pose) {
       const minPartConfidence = 0.5;
-      window.tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx, undefined,'red', 'red');
-      window.tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx, undefined, '#6e8afa');
+      window.tmPose.drawKeypoints(
+        pose.keypoints,
+        minPartConfidence,
+        ctx,
+        undefined,
+        "red",
+        "red"
+      );
+      window.tmPose.drawSkeleton(
+        pose.keypoints,
+        minPartConfidence,
+        ctx,
+        undefined,
+        "#6e8afa"
+      );
     }
   };
+
+  let exerciseFinished = {}
+
+  let finished = () => {
+    if (reps == 0) {window.location="/"; return}
+    db.collection("users").doc(currentUser.id).update({
+      ejerciciosRealizados: [...currentUser.ejerciciosRealizados, {name: currentExercise.name, reps: reps, date: (+new Date())}],
+  })
+  .then(() => {
+      window.location="/";
+  })
+  .catch((error) => {
+      console.error("Error writing document: ", error);
+  });
+  };
+
+  let startTimer = () => {
+    startBtn.current.style.display = 'none';
+    countdown.current.style.display = 'block';
+    let cd = countdown.current;
+    setTimeout(()=>{ cd.innerText = '2' }, 1000)
+    setTimeout(()=>{ cd.innerText = '1' }, 2000)
+    setTimeout(()=>{ cd.innerText = '0' }, 3000)
+    setTimeout(()=>{ setRunning(true) }, 3200)
+  }
 
   return (
     <>
       <div>
-
-        <div className={S.ui_container}>
-
-        <div className={S.header}>
-          <BurgerMenu />
-          <p>class data: 123</p>
-        </div>
-
-        <div className={ S.counter }>
-          <div>
-          <h2>{reps}</h2>
-          <h3>Quedan 6</h3>
+        <div className={`${S.ui_container}  ${ running ? S.running : '' } `}>
+          <div className={S.header}>
+            <BurgerMenu />
+            <p>class data: 123</p>
           </div>
+
+          <div className={S.counter}>
+            { running ?
+            <div>
+              <h2>{reps}</h2>
+              <h3>{currentExercise.reps - reps}</h3>
+            </div>
+            :
+            <div className={S.countdown}>
+              <h2 ref={countdown}>3</h2>
+              <button ref={startBtn} onClick={()=>startTimer()}>Empezar</button>
+            </div>
+             }
+          </div>
+
+          {running && <div className={S.buttons}>
+            <button onClick={() => finished()}>Terminar</button>
+          </div>}
         </div>
 
-        <div className={ S.buttons }>
-          <button>Terminar</button>
-        </div>
-
-        </div>
-
-        <div className={S.canvas_container} style={{ backgroundColor: avgColor }}>
+        <div
+          className={S.canvas_container}
+          style={{ backgroundColor: avgColor }}
+        >
           <canvas id="canvas" ref={canvasRef}></canvas>
         </div>
-
       </div>
     </>
   );

@@ -31,7 +31,13 @@ const UserProfile = () => {
         </div>
         <div className={S.box}>
           <div className={S.title}>Workouts</div>
-          <div>0</div>
+          {user.ejerciciosRealizados.length ? (
+            user.ejerciciosRealizados.map((ejercicio, index) => (
+              <div key={index}>{ejercicio.name}, {ejercicio.reps}, {ejercicio?.date}</div>
+            ))
+          ) : (
+            <div>0</div>
+          )}
         </div>
       </div>
     </div>
