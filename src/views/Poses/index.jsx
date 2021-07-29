@@ -3,7 +3,7 @@ import FastAverageColor from "fast-average-color";
 import S from "./styles.module.css";
 import { useRecoilValue } from "recoil";
 import { currentExerciseState } from "../../data/currentExercise";
-import BurgerMenu from '../../components/BurgerMenu'
+import BurgerMenu from "../../components/BurgerMenu";
 
 const fac = new FastAverageColor();
 
@@ -11,7 +11,7 @@ const Poses = () => {
   let excercises = [
     { name: "curl", model: "9DHjJje2y" },
     { name: "circulito", model: "GnNXiBIym" },
-    { name: 'sentadillas', model: 'Bh8JyU6Vu' }
+    { name: "sentadillas", model: "Bh8JyU6Vu" },
   ];
 
   let modelId = excercises[0].model;
@@ -53,7 +53,7 @@ const Poses = () => {
 
     const canvas = canvasRef.current;
     canvas.width = w;
-    canvas.height = height / width * w;
+    canvas.height = (height / width) * w;
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const Poses = () => {
 
     let loop = async () => {
       try {
-        ctx.clearRect(0,0,ctx.width, ctx.height);
+        ctx.clearRect(0, 0, ctx.width, ctx.height);
         webcam.update();
         await predict();
       } catch (e) {
@@ -82,8 +82,7 @@ const Poses = () => {
 
     loop();
 
-    return () => clearInterval( bgColorTimer )
-
+    return () => clearInterval(bgColorTimer);
   }, [webcam?.update]);
 
   let up = false;
@@ -95,7 +94,6 @@ const Poses = () => {
   */
 
   let predict = async () => {
-
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     const prediction = await model.predict(posenetOutput);
 
@@ -128,39 +126,55 @@ const Poses = () => {
 
     if (pose) {
       const minPartConfidence = 0.5;
-      window.tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx, undefined,'red', 'red');
-      window.tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx, undefined, '#6e8afa');
+      window.tmPose.drawKeypoints(
+        pose.keypoints,
+        minPartConfidence,
+        ctx,
+        undefined,
+        "red",
+        "red"
+      );
+      window.tmPose.drawSkeleton(
+        pose.keypoints,
+        minPartConfidence,
+        ctx,
+        undefined,
+        "#6e8afa"
+      );
     }
+  };
+
+  let finish = () => {
+    
   };
 
   return (
     <>
       <div>
-
         <div className={S.ui_container}>
+          <div className={S.header}>
+            <BurgerMenu />
+            <p>class data: 123</p>
+          </div>
 
-        <div className={S.header}>
-          <BurgerMenu />
-          <p>class data: 123</p>
-        </div>
+          <div className={S.counter}>
+            <div>
+              <h2>{reps}</h2>
+              <h3>Quedan 6</h3>
+            </div>
+          </div>
 
-        <div className={ S.counter }>
-          <div>
-          <h2>{reps}</h2>
-          <h3>Quedan 6</h3>
+          <div className={S.buttons}>
+            <button onClick={() => finish()}>Terminar</button>
           </div>
         </div>
 
-        <div className={ S.buttons }>
-          <button>Terminar</button>
-        </div>
-
-        </div>
-
-        <div className={S.canvas_container} style={{ backgroundColor: avgColor }}>
+        <div
+          className={S.canvas_container}
+          style={{ backgroundColor: avgColor }}
+        >
           <canvas id="canvas" ref={canvasRef}></canvas>
         </div>
-
       </div>
     </>
   );
