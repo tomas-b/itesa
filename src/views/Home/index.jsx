@@ -42,12 +42,13 @@ const Home = () => {
   useEffect(() => {
     getUser(currentUser.uid).then((res) => {
       const userInfo = res.data();
-      setUser({ ...userInfo, email: currentUser.email, id: currentUser.uid });
+      setUser({ ...userInfo });
+
       localStorage.setItem(
         "user",
         JSON.stringify({
           name: userInfo.name,
-          email: currentUser.email,
+          email: userInfo.email,
           avatar: userInfo.avatar,
           gender: userInfo.gender,
           points: userInfo.points,

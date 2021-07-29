@@ -12,10 +12,7 @@ const Header = () => {
     <div className={S.header}>
       <BurgerMenu />
       <Link to="/perfil">
-        <div
-          className={S.avatar}
-          style={{ backgroundImage: `url('${user.avatar || "/avatar.bmp"}')` }}
-        />
+        <div className={S.avatar} style={{ backgroundImage: `url('${user.avatar}')` }} />
       </Link>
     </div>
   );
