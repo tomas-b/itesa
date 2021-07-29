@@ -16,7 +16,10 @@ const UserProfile = () => {
       </div>
       <div className={S.grid_wrapper}>
         <div className={S.avatar_container}>
-          <div className={S.avatar} style={{ backgroundImage: `url(${user.avatar})` }} />
+          <div
+            className={S.avatar}
+            style={{ backgroundImage: `url(${user.avatar})` }}
+          />
         </div>
         <div>
           <div className={S.displayName}>{capitalize(user.name)}</div>
@@ -31,7 +34,13 @@ const UserProfile = () => {
         </div>
         <div className={S.box}>
           <div className={S.title}>Workouts</div>
-          <div>0</div>
+          {user.ejerciciosRealizados.length ? (
+            user.ejerciciosRealizados.map((ejercicio, index) => (
+              <div key={index}>{ejercicio}</div>
+            ))
+          ) : (
+            <div>0</div>
+          )}
         </div>
       </div>
     </div>

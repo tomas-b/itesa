@@ -4,6 +4,8 @@ import S from "./styles.module.css";
 import { useRecoilValue } from "recoil";
 import { currentExerciseState } from "../../data/currentExercise";
 import BurgerMenu from "../../components/BurgerMenu";
+import { userState } from "../Home";
+import { db } from "../../../src/base";
 
 const fac = new FastAverageColor();
 
@@ -24,6 +26,8 @@ const Poses = () => {
   let [avgColor, setAvgColor] = useState("#000");
   const [reps, setReps] = useState(0);
   const currentExercise = useRecoilValue(currentExerciseState);
+  const currentUser = useRecoilValue(userState);
+  console.log(currentUser)
 
   let w = window.innerWidth;
   // let h = window.innerHeight;
@@ -144,8 +148,16 @@ const Poses = () => {
     }
   };
 
-  let finish = () => {
-    
+  let finished = () => {
+    db.collection("users").doc(currentUser.id).update({
+      ejerciciosRealizados: [...currentUser.ejerciciosRealizados, currentExercise.name],
+  })
+  .then(() => {
+      console.log("Ejercicios agregados ->", currentUser.ejerciciosRealizados);
+  })
+  .catch((error) => {
+      console.error("Error writing document: ", error);
+  });
   };
 
   return (
@@ -165,7 +177,7 @@ const Poses = () => {
           </div>
 
           <div className={S.buttons}>
-            <button onClick={() => finish()}>Terminar</button>
+            <button onClick={() => finished()}>Terminar</button>
           </div>
         </div>
 
