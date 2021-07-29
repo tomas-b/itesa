@@ -1,18 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import FastAverageColor from "fast-average-color";
 import S from "./styles.module.css";
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from "recoil";
 import { currentExerciseState } from "../../data/currentExercise";
+import BurgerMenu from '../../components/BurgerMenu'
 
 const fac = new FastAverageColor();
 
 const Poses = () => {
-
-  
-
   let excercises = [
     { name: "curl", model: "9DHjJje2y" },
     { name: "circulito", model: "GnNXiBIym" },
+    { name: 'sentadillas', model: 'Bh8JyU6Vu' }
   ];
 
   let modelId = excercises[0].model;
@@ -24,66 +23,67 @@ const Poses = () => {
   let [class2, setClass2] = useState(0);
   let [avgColor, setAvgColor] = useState("#000");
   const [reps, setReps] = useState(0);
-  const currentExercise = useRecoilValue( currentExerciseState )
+  const currentExercise = useRecoilValue(currentExerciseState);
 
   let w = window.innerWidth;
+  // let h = window.innerHeight;
 
   let canvasRef = useRef();
 
-  useEffect(()=>{
-    setReps( currentExercise.reps )
-  }, [currentExercise])
+  useEffect(() => {
+    setReps(currentExercise.reps);
+  }, [currentExercise]);
 
   let init = async () => {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
-    // load the model and metadata
-    // Refer to tmPose.loadFromFiles() in the API to support files from a file picker
     let _model = await window.tmPose.load(modelURL, metadataURL);
     let _maxPredictions = _model.getTotalClasses();
     setModel(_model);
 
-    // Convenience function to setup a webcam
-    const flip = true; // whether to flip the webcam
-    let _webcam = new window.tmPose.Webcam(w, w, flip); // width, height, flip
-    await _webcam.setup(); // request access to the webcam
+    const flip = true;
+    let _webcam = new window.tmPose.Webcam(w, w, flip);
+    // let _webcam = new window.tmPose.Webcam(w, h, flip);
+    await _webcam.setup();
     await _webcam.play();
     let { height, width } = _webcam.webcam;
     console.log(height, width);
     setWebcam(_webcam);
 
-    // window.requestAnimationFrame(loop);
-
-    // append/get elements to the DOM
-    // const canvas = document.getElementById("canvas");
     const canvas = canvasRef.current;
     canvas.width = w;
-    canvas.height = height;
+    canvas.height = height / width * w;
   };
 
   useEffect(() => {
-     init();
+    init();
   }, []);
 
   useEffect(async () => {
     if (!webcam?.update) return;
 
-    setInterval(() => {
+    let bgColorTimer = setInterval(() => {
       fac.getColorAsync(canvasRef.current).then((c) => setAvgColor(c.rgba));
     }, 1000);
 
+    let ctx = canvasRef.current?.getContext("2d");
+
     let loop = async () => {
       try {
-        webcam.update(); // update the webcam frame
+        ctx.clearRect(0,0,ctx.width, ctx.height);
+        webcam.update();
         await predict();
       } catch (e) {
         console.log(e);
       }
       window.requestAnimationFrame(loop);
-      // setTimeout(loop, 1500);
     };
+
     loop();
+
+    return () => clearInterval( bgColorTimer )
+
   }, [webcam?.update]);
 
   let up = false;
@@ -95,20 +95,13 @@ const Poses = () => {
   */
 
   let predict = async () => {
-    // Prediction #1: run input through posenet
-    // estimatePose can take in an image, video or canvas html element
-    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-    // Prediction 2: run input through teachable machine classification model
-    // console.log(pose, posenetOutput)
 
+    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     const prediction = await model.predict(posenetOutput);
 
     // Voy bajando (down es class1)
     if (prediction[0].probability > 0.8 && !down) {
       setReps((reps) => {
-        // if (reps > 4) {
-        //   finished();
-        // }
         return reps - 1;
       });
       down = true;
@@ -120,7 +113,7 @@ const Poses = () => {
       up = true;
       down = false;
     }
-    
+
     setClass1(prediction[0].probability.toFixed(2));
     setClass2(prediction[1].probability.toFixed(2));
 
@@ -135,36 +128,40 @@ const Poses = () => {
 
     if (pose) {
       const minPartConfidence = 0.5;
-      window.tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-      window.tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+      window.tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx, undefined,'red', 'red');
+      window.tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx, undefined, '#6e8afa');
     }
   };
 
-  // const finished = () => {
-  //   console.log("finished");
-  //   webcam?.stop();
-  // };
-
   return (
     <>
-    <div>
-      <div className={S.container} style={{ backgroundColor: avgColor }}>
-        <p>Reps: {reps}</p>
-        <canvas id="canvas" ref={canvasRef}></canvas>
-        <div id="label-container">
-          <div className={`${S.bar} ${S.first}`}>
-            {" "}
-            <span>{class1}</span>
-            <div style={{ width: class1 * 100 + "%" }}></div>
-          </div>
-          <div className={`${S.bar} ${S.second}`}>
-            {" "}
-            <span>{class2}</span>
-            <div style={{ width: class2 * 100 + "%" }}></div>
+      <div>
+
+        <div className={S.ui_container}>
+
+        <div className={S.header}>
+          <BurgerMenu />
+          <p>class data: 123</p>
+        </div>
+
+        <div className={ S.counter }>
+          <div>
+          <h2>{reps}</h2>
+          <h3>Quedan 6</h3>
           </div>
         </div>
+
+        <div className={ S.buttons }>
+          <button>Terminar</button>
+        </div>
+
+        </div>
+
+        <div className={S.canvas_container} style={{ backgroundColor: avgColor }}>
+          <canvas id="canvas" ref={canvasRef}></canvas>
+        </div>
+
       </div>
-    </div>
     </>
   );
 };
