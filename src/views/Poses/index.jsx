@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import FastAverageColor from "fast-average-color";
-// import * as tf from "@tensorflow/tfjs";
-// import * as tmPose from "@teachablemachine/pose";
 import S from "./styles.module.css";
 import { useRecoilValue } from 'recoil';
 import { currentExerciseState } from "../../data/currentExercise";
@@ -29,7 +27,6 @@ const Poses = () => {
   const currentExercise = useRecoilValue( currentExerciseState )
 
   let w = window.innerWidth;
-  let h = window.innerHeight;
 
   let canvasRef = useRef();
 
@@ -63,17 +60,10 @@ const Poses = () => {
     const canvas = canvasRef.current;
     canvas.width = w;
     canvas.height = height;
-    // ctx = canvas.getContext("2d");
-    // labelContainer = document.getElementById("label-container");
-    // for (let i = 0; i < maxPredictions; i++) {
-    //   // and class labels
-    //   labelContainer.appendChild(document.createElement("div"));
-    // }
-
   };
 
-  useEffect(async () => {
-    await init();
+  useEffect(() => {
+     init();
   }, []);
 
   useEffect(async () => {
@@ -130,17 +120,7 @@ const Poses = () => {
       up = true;
       down = false;
     }
-
-    // for (let i = 0; i < maxPredictions; i++) {
-    //   const classPrediction =
-    //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-    //   labelContainer.childNodes[i].innerHTML = classPrediction;
-    // }
-
-    // console.log(JSON.stringify(prediction))
-
-    // console.log(prediction);
-
+    
     setClass1(prediction[0].probability.toFixed(2));
     setClass2(prediction[1].probability.toFixed(2));
 
@@ -160,10 +140,10 @@ const Poses = () => {
     }
   };
 
-  const finished = () => {
-    console.log("finished");
-    webcam?.stop();
-  };
+  // const finished = () => {
+  //   console.log("finished");
+  //   webcam?.stop();
+  // };
 
   return (
     <>
