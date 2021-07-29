@@ -52,7 +52,7 @@ const Poses = () => {
 
     const canvas = canvasRef.current;
     canvas.width = w;
-    canvas.height = height;
+    canvas.height = height / width * w;
   };
 
   useEffect(() => {
@@ -66,8 +66,11 @@ const Poses = () => {
       fac.getColorAsync(canvasRef.current).then((c) => setAvgColor(c.rgba));
     }, 1000);
 
+    let ctx = canvasRef.current?.getContext("2d");
+
     let loop = async () => {
       try {
+        ctx.clearRect(0,0,ctx.width, ctx.height);
         webcam.update();
         await predict();
       } catch (e) {
@@ -75,7 +78,9 @@ const Poses = () => {
       }
       window.requestAnimationFrame(loop);
     };
+
     loop();
+
   }, [webcam?.update]);
 
   let up = false;
@@ -120,8 +125,8 @@ const Poses = () => {
 
     if (pose) {
       const minPartConfidence = 0.5;
-      window.tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-      window.tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+      window.tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx, undefined,'red', 'red');
+      window.tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx, undefined, '#6e8afa');
     }
   };
 
@@ -134,6 +139,17 @@ const Poses = () => {
         <div className={S.header}>
           <BurgerMenu />
           <p>class data: 123</p>
+        </div>
+
+        <div className={ S.counter }>
+          <div>
+          <h2>{reps}</h2>
+          <h3>Quedan 6</h3>
+          </div>
+        </div>
+
+        <div className={ S.buttons }>
+          <button>Terminar</button>
         </div>
 
         </div>
