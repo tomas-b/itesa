@@ -21,7 +21,7 @@ const Card = ({ exercise, setCurrentExercise }) => {
         <Link
           to={`/tutorial/`}
           className={s.btn}
-          onClick={() => console.log(exercise) | setCurrentExercise(exercise)}
+          onClick={() => setCurrentExercise(exercise)}
         >
           Ver Tutorial
         </Link>
