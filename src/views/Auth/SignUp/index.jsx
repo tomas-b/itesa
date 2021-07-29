@@ -36,6 +36,8 @@ const SingUp = () => {
             db.collection("users")
               .doc(user.uid)
               .set({
+                id: user.uid,
+                email: user.email,
                 gender: form.gender,
                 avatar: `https://picsum.photos/seed/${user.uid}/200/300`,
                 points: 0,
