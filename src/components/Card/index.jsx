@@ -12,9 +12,10 @@ const Card = ({ exercise, setCurrentExercise }) => {
           {exercise.needs && <li>{exercise.needs.join(", ")}</li>}
         </ul>
       </div>
-      {/* style={{ backgroundImage: `url('${exercise.image}')` }} */}
-      <div className={s.image_container}>
-        <img className={s.image} src={exercise.image} alt={exercise.name} />
+      <div className={s.image_container}
+        style={{ backgroundImage: `url('${exercise.image}')` }}
+      >
+        {/* <img className={s.image} src={exercise.image} alt={exercise.name} /> */}
       </div>
       <div className={s.btn_wrapper}>
         <Link
