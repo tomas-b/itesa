@@ -3,7 +3,8 @@
 	display: grid;
 	justify-content: center;
 	align-items: center;
-	transition: background-color .5s;
+  transition: background-color .5s;
+  background: black;
 }
 
 .ui_container {
