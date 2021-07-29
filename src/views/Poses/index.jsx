@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import FastAverageColor from "fast-average-color";
-// import * as tf from "@tensorflow/tfjs";
-// import * as tmPose from "@teachablemachine/pose";
-import { useParams } from "react-router-dom";
 import S from "./styles.module.css";
 import { useRecoilValue } from 'recoil';
 import { currentExerciseState } from "../../data/currentExercise";
@@ -23,8 +20,6 @@ const Poses = () => {
   const URL = `https://teachablemachine.withgoogle.com/models/${modelId}/`;
   let [model, setModel] = useState(null);
   let [webcam, setWebcam] = useState(null);
-  let [run, setRun] = useState(false);
-  let [maxPredictions, setMaxPredictions] = useState(null);
   let [class1, setClass1] = useState(0);
   let [class2, setClass2] = useState(0);
   let [avgColor, setAvgColor] = useState("#000");
@@ -32,7 +27,6 @@ const Poses = () => {
   const currentExercise = useRecoilValue( currentExerciseState )
 
   let w = window.innerWidth;
-  let h = window.innerHeight;
 
   let canvasRef = useRef();
 
@@ -49,7 +43,6 @@ const Poses = () => {
     let _model = await window.tmPose.load(modelURL, metadataURL);
     let _maxPredictions = _model.getTotalClasses();
     setModel(_model);
-    setMaxPredictions(_maxPredictions);
 
     // Convenience function to setup a webcam
     const flip = true; // whether to flip the webcam
@@ -67,18 +60,10 @@ const Poses = () => {
     const canvas = canvasRef.current;
     canvas.width = w;
     canvas.height = height;
-    // ctx = canvas.getContext("2d");
-    // labelContainer = document.getElementById("label-container");
-    // for (let i = 0; i < maxPredictions; i++) {
-    //   // and class labels
-    //   labelContainer.appendChild(document.createElement("div"));
-    // }
-
-    setRun(true);
   };
 
-  useEffect(async () => {
-    await init();
+  useEffect(() => {
+     init();
   }, []);
 
   useEffect(async () => {
@@ -135,17 +120,7 @@ const Poses = () => {
       up = true;
       down = false;
     }
-
-    // for (let i = 0; i < maxPredictions; i++) {
-    //   const classPrediction =
-    //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-    //   labelContainer.childNodes[i].innerHTML = classPrediction;
-    // }
-
-    // console.log(JSON.stringify(prediction))
-
-    // console.log(prediction);
-
+    
     setClass1(prediction[0].probability.toFixed(2));
     setClass2(prediction[1].probability.toFixed(2));
 
@@ -165,10 +140,10 @@ const Poses = () => {
     }
   };
 
-  const finished = () => {
-    console.log("finished");
-    webcam?.stop();
-  };
+  // const finished = () => {
+  //   console.log("finished");
+  //   webcam?.stop();
+  // };
 
   return (
     <>
