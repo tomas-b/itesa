@@ -41,8 +41,8 @@ const Dial = () => {
   // const [selectedNum, setSelectedNum] = useState("");
   const setCurrentExercise = useSetRecoilState(currentExerciseState);
 
-
   useEffect(() => {
+    setCurrentExercise( exc => ({...exc, reps: 1}) );
     dialRef.current.addEventListener(
       "scroll",
       debounce(() => {
@@ -65,7 +65,7 @@ const Dial = () => {
         }
       })
     );
-  }); // [window.innerWidth]);
+  },[]); // [window.innerWidth]);
 
   return (
     <div className={S.dial} ref={dialRef}>

@@ -27,7 +27,6 @@ const Poses = () => {
   const [reps, setReps] = useState(0);
   const currentExercise = useRecoilValue(currentExerciseState);
   const currentUser = useRecoilValue(userState);
-  console.log(currentUser)
   let [running, setRunning] = useState(false);
   let countdown = useRef()
   let startBtn = useRef()
@@ -39,7 +38,7 @@ const Poses = () => {
 
   useEffect(() => {
     if (currentExercise.reps === reps) {
-      finish();
+      finished();
     }
   }, [reps]);
 
@@ -151,12 +150,15 @@ const Poses = () => {
     }
   };
 
+  let exerciseFinished = {}
+
   let finished = () => {
+    if (reps == 0) {window.location="/"; return}
     db.collection("users").doc(currentUser.id).update({
-      ejerciciosRealizados: [...currentUser.ejerciciosRealizados, currentExercise.name],
+      ejerciciosRealizados: [...currentUser.ejerciciosRealizados, {name: currentExercise.name, reps: reps, date: (+new Date())}],
   })
   .then(() => {
-      console.log("Ejercicios agregados ->", currentUser.ejerciciosRealizados);
+      window.location="/";
   })
   .catch((error) => {
       console.error("Error writing document: ", error);
@@ -197,7 +199,7 @@ const Poses = () => {
           </div>
 
           {running && <div className={S.buttons}>
-            <button onClick={() => finish()}>Terminar</button>
+            <button onClick={() => finished()}>Terminar</button>
           </div>}
         </div>
 
