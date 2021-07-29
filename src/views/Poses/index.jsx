@@ -11,6 +11,7 @@ const Poses = () => {
   let excercises = [
     { name: "curl", model: "9DHjJje2y" },
     { name: "circulito", model: "GnNXiBIym" },
+    { name: 'sentadillas', model: 'Bh8JyU6Vu' }
   ];
 
   let modelId = excercises[0].model;
@@ -62,7 +63,7 @@ const Poses = () => {
   useEffect(async () => {
     if (!webcam?.update) return;
 
-    setInterval(() => {
+    let bgColorTimer = setInterval(() => {
       fac.getColorAsync(canvasRef.current).then((c) => setAvgColor(c.rgba));
     }, 1000);
 
@@ -80,6 +81,8 @@ const Poses = () => {
     };
 
     loop();
+
+    return () => clearInterval( bgColorTimer )
 
   }, [webcam?.update]);
 
