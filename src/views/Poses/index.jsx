@@ -184,7 +184,7 @@ const Poses = () => {
         <div className={`${S.ui_container}  ${ running ? S.running : '' } `}>
           <div className={S.header}>
             <BurgerMenu />
-            <p>class data: 123</p>
+            <p>{currentExercise.name}</p>
           </div>
 
           <div className={S.counter}>
