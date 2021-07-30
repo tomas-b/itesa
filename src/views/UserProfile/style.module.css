@@ -63,14 +63,18 @@
 
 .tabs {
   background:#e7e7e7;
+  background: linear-gradient(0deg, rgba(245,245,245,1) 0%, #e7e7e7 100%);
   margin-top: -20px;
   padding: 10px;
   padding-top: 30px;
+  bottom:0;
+  overflow-y: scroll;
 }
 
 .tabs ul li {
   margin-top: 5px;
-  border-bottom: 1px solid rgba(0 0 0 / .2)
+  border-bottom: 1px solid rgba(0 0 0 / .2);
+  padding: 20px;
 }
 
 .tabs ul span {
