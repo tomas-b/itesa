@@ -30,6 +30,7 @@ const Poses = () => {
   let [running, setRunning] = useState(false);
   let countdown = useRef()
   let startBtn = useRef()
+  let counterRef = useRef()
 
   let w = window.innerWidth;
   // let h = window.innerHeight;
@@ -37,7 +38,8 @@ const Poses = () => {
   let canvasRef = useRef();
 
   useEffect(() => {
-    if (currentExercise.reps === reps) {
+    console.log('>>>')
+    if (currentExercise.reps - reps < 1) {
       finished();
     }
   }, [reps]);
@@ -153,6 +155,7 @@ const Poses = () => {
   let exerciseFinished = {}
 
   let finished = () => {
+    counterRef.current.style.opacity = '0';
     if (reps == 0) {window.location="/"; return}
     db.collection("users").doc(currentUser.id).update({
       ejerciciosRealizados: [...currentUser.ejerciciosRealizados, {name: currentExercise.name, reps: reps, date: (+new Date())}],
@@ -186,9 +189,9 @@ const Poses = () => {
 
           <div className={S.counter}>
             { running ?
-            <div>
+            <div ref={counterRef}>
               <h2>{reps}</h2>
-              <h3>{currentExercise.reps - reps}</h3>
+              <h3>Quedan {currentExercise.reps - reps}</h3>
             </div>
             :
             <div className={S.countdown}>
