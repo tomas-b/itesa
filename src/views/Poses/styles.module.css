@@ -25,13 +25,13 @@
 
 .counter h2 {
   text-shadow: 0px 3px 7px black;
-  font-size: 4em;
+  font-size: 6em;
   opacity: .8
 }
 
 .counter h3 {
   text-shadow: 0px 3px 4px black;
-  font-size: 2em;
+  font-size: 1.8em;
   opacity: .5
 }
 
