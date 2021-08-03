@@ -3,11 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import S from "./styles.module.css";
 
-const Search = () => {
+const Search = ({ query, onChange, searchExercises }) => {
   return (
     <div className={S.search_wrapper}>
       <FontAwesomeIcon icon={faSearch} />
-      <input type="text" placeholder="Buscá tu ejercicio" />
+      <input
+        onChange={onChange}
+        onKeyUp={searchExercises}
+        type="text"
+        placeholder="Buscá tu ejercicio"
+        value={query}
+      />
     </div>
   );
 };

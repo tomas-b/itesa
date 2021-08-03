@@ -6,10 +6,11 @@ import PrivateRoute from "./PrivateRoute";
 import SingUp from "./views/Auth/SignUp";
 import LogIn from "./views/Auth/LogIn";
 import Home from "./views/Home";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./views/UserProfile";
 import Categories from "./views/Categories";
-import Points from "./views/Points"
+import Points from "./views/Points";
 import Tutorial from "./views/Tutorial";
+import Poses from "./views/Poses";
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
           <PrivateRoute exact path="/perfil" component={UserProfile} />
           <PrivateRoute path="/categories/:name" component={Categories} />
           <PrivateRoute path="/points" component={Points} />
-          <PrivateRoute path="/tutorial/:video" component={Tutorial} />
+          <PrivateRoute path="/tutorial" component={Tutorial} />
+          <PrivateRoute path="/poses" component={Poses} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>
