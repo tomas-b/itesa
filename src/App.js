@@ -11,6 +11,7 @@ import Categories from "./views/Categories";
 import Points from "./views/Points";
 import Tutorial from "./views/Tutorial";
 import Poses from "./views/Poses";
+import Iframe from "./views/Iframe";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <PrivateRoute path="/points" component={Points} />
           <PrivateRoute path="/tutorial" component={Tutorial} />
           <PrivateRoute path="/poses" component={Poses} />
+          <PrivateRoute path="/iframe" component={Iframe} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>

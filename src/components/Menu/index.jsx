@@ -66,6 +66,13 @@ const Menu = () => {
               MI PERFIL
             </Link>
           </li>
+          <li>
+            <Link
+              to={"/iframe"}
+            >
+              IFRAME
+            </Link>
+          </li>
         </ul>
         <div className={S.logout_wrapper}>
           <button onClick={logOut}>CERRAR SESION</button>
