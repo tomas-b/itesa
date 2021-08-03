@@ -12,7 +12,7 @@ export default () => {
 		width: '100vw',
 		border: 'none'
 	}}
-	src='/tf_pose/index.html'
+	src='/mindar/index.html'
 	></iframe>
 	</>
 }
