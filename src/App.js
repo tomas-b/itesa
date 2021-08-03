@@ -10,7 +10,8 @@ import UserProfile from "./views/UserProfile";
 import Categories from "./views/Categories";
 import Points from "./views/Points";
 import Tutorial from "./views/Tutorial";
-import Poses from "./views/Poses";
+// import Poses from "./views/Poses";
+import ClassifyPoses from "./views/ClassifyPoses";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
           <PrivateRoute path="/categories/:name" component={Categories} />
           <PrivateRoute path="/points" component={Points} />
           <PrivateRoute path="/tutorial" component={Tutorial} />
-          <PrivateRoute path="/poses" component={Poses} />
+          <PrivateRoute path="/poses" component={ClassifyPoses} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>
