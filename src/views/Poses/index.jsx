@@ -152,11 +152,9 @@ const Poses = () => {
     }
   };
 
-  let exerciseFinished = {}
-
   let finished = () => {
     counterRef.current.style.opacity = '0';
-    if (reps == 0) {window.location="/"; return}
+    if (reps === 0) {window.location="/"; return}
     db.collection("users").doc(currentUser.id).update({
       ejerciciosRealizados: [...currentUser.ejerciciosRealizados, {name: currentExercise.name, reps: reps, date: (+new Date())}],
   })

@@ -1,23 +1,37 @@
 import React, { useEffect, useContext } from "react";
-import Header from "../../components/Header";
-import Menu from "../../components/Menu";
-import { AuthContext } from "../../Auth";
+import { useRecoilState } from "recoil";
+import Menu, { showMenuState } from "../../components/Menu";
 
-export default () => {
+import { AuthContext } from "../../Auth";
+import s from "./styles.module.css";
+
+const Iframe = () => {
+  let [showMenu, setShowMenu] = useRecoilState(showMenuState);
+
   const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    var eventMethod = window.addEventListener
+      ? "addEventListener"
+      : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
+
+    eventer(messageEvent, function (e) {
+      if (e.data === "menu" || e.message === "menu") setShowMenu(true);
+    });
+  });
 
   return (
     <>
       <Menu />
-      <Header />
       <iframe
-        style={{
-          height: "calc(100vh - 82px)",
-          width: "100vw",
-          border: "none",
-        }}
+        title={"MindArJs"}
+        className={s.iframe}
         src={`/mindar/index.html#id:${currentUser.uid}`}
       ></iframe>
     </>
   );
 };
+
+export default Iframe

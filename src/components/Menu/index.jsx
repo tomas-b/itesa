@@ -52,8 +52,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              onClick={() => linkClick("/points")}
-              to={refresh ? "#" : "/points"}
+              to={"/points"}
             >
               SUMÁ PUNTOS
             </Link>
@@ -64,13 +63,6 @@ const Menu = () => {
               to={refresh ? "#" : "/perfil"}
             >
               MI PERFIL
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/iframe"}
-            >
-              IFRAME
             </Link>
           </li>
         </ul>
