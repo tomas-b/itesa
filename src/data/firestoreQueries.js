@@ -19,6 +19,24 @@ export const getCategories = async () => {
   return categories.docs.map((category) => category.data());
 };
 
-export const getUser = async (id) => {
-  return db.collection("users").doc(id).get();
+export const getUser = async (userId) => {
+  return db.collection("users").doc(userId).get();
+};
+
+export const addNewExercise = async (currentUser, currentExercise, reps) => {
+  console.log("adding new exercise", currentExercise);
+  db.collection("users")
+    .doc(currentUser.id)
+    .update({
+      ejerciciosRealizados: [
+        ...currentUser.ejerciciosRealizados,
+        { name: currentExercise.name, reps: reps, date: +new Date() },
+      ],
+    })
+    .then(() => {
+      window.location = "/";
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
 };

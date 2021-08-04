@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useRecoilValue } from "recoil";
+import { Link } from "react-router-dom";
 import Webcam from "react-webcam";
-import BurgerMenu from "../../components/BurgerMenu";
 import "@tensorflow/tfjs-backend-webgl";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
+
+import { userState } from "../Home";
+import { currentExerciseState } from "../../data/currentExercise";
+import { addNewExercise } from "../../data/firestoreQueries";
+import BurgerMenu from "../../components/BurgerMenu";
 import S from "./styles.module.css";
 
 // poseDetection
@@ -15,21 +21,19 @@ poseDetection
 let myModel = null;
 
 const ClassifyPoses = () => {
+  const currentExercise = useRecoilValue(currentExerciseState);
+  const currentUser = useRecoilValue(userState);
   let webcamRef = useRef(null);
   let canvasRef = useRef(null);
   let canvas2Ref = useRef(null);
   let jsonRef = useRef(null);
   let binRef = useRef(null);
   let timerRef = useRef(null);
-  let [totalReps, setTotalReps] = useState(0);
+  let [totalReps, setTotalReps] = useState(currentExercise.reps);
 
   let [prediction, setPrediction] = useState(null);
 
-  let [currentRep, setCurrentRep] = useState([
-    +new Date(),
-    +new Date(),
-    +new Date(),
-  ]);
+  let [currentRep, setCurrentRep] = useState([+new Date(), +new Date(), +new Date()]);
   let [posePrediction, setPosePrediction] = useState(0);
   let [reps, setReps] = useState(0);
   const poseRef = useRef(posePrediction);
@@ -38,8 +42,7 @@ const ClassifyPoses = () => {
   useEffect(() => {
     let diff1 = currentRep[1] - currentRep[0];
     let diff2 = currentRep[2] - currentRep[1];
-    if (diff1 > 500 && diff2 > 1500 && poseRef.current === 0)
-      setReps((r) => ++r);
+    if (diff1 > 500 && diff2 > 1500 && poseRef.current === 0) setReps((r) => ++r);
   }, [currentRep]);
 
   useEffect(() => {
@@ -58,10 +61,10 @@ const ClassifyPoses = () => {
     let loop = async () => {
       let result = null;
 
+      if (!webcamRef.current) return;
+
       try {
-        const { keypoints } = (
-          await detector.estimatePoses(webcamRef.current.video)
-        )[0];
+        const { keypoints } = (await detector.estimatePoses(webcamRef.current.video))[0];
 
         if (myModel !== null) {
           let _xs = keypoints.map(({ x, y }) => [x, y]).flat();
@@ -161,8 +164,7 @@ const ClassifyPoses = () => {
     };
 
     webcamRef.current.video.addEventListener("loadeddata", () => {
-      let { top, left, height, width } =
-        webcamRef.current.video.getBoundingClientRect();
+      let { top, left, height, width } = webcamRef.current.video.getBoundingClientRect();
       canvasRef.current.height = height;
       canvasRef.current.width = width;
       ctxW = width;
@@ -177,21 +179,36 @@ const ClassifyPoses = () => {
     myModel = await tf.loadLayersModel("/posesModels/curl/curl.json");
   };
 
+  const onStop = async () => {
+    addNewExercise(currentUser, currentExercise, reps);
+  };
+
   return (
     <>
       {/* <Menu/> */}
       <div className={S.header}>
         <BurgerMenu />
         <div className={S.title}>
-          <h3>Curl de Biceps</h3>
+          <h3>{currentExercise.name}</h3>
         </div>
       </div>
 
       <div className={S.center_container_reps}>
         <div>
-          <h1>{reps}</h1>
-          <h2>Quedan {totalReps - reps}</h2>
-          <button>TERMINAR</button>
+          {reps <= 0 ? (
+            <div>
+              <h1>{reps}</h1>
+              <h2>Quedan {totalReps - reps}</h2>
+              <button onClick={onStop}>TERMINAR</button>
+            </div>
+          ) : (
+            <div>
+              <h2>Terminaste!</h2>
+              <Link to="/perfil">
+                <button>Ver detalle</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <div className={S.center_container_cv}>
@@ -203,12 +220,7 @@ const ClassifyPoses = () => {
 
       <div className={S.panel}>
         <div>
-          <canvas
-            height={50}
-            width={120}
-            ref={canvas2Ref}
-            className={S.panel_canvas}
-          />
+          <canvas height={50} width={120} ref={canvas2Ref} className={S.panel_canvas} />
           <div className={S.timer} ref={timerRef}>
             <div className={posePrediction === 0 ? S.red : S.blue} />
           </div>
