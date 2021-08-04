@@ -43,7 +43,7 @@
 }
 
 
-.center_container, .center_container_cv {
+.center_container, .center_container_cv, .center_container_reps {
 	display: grid;
 	align-items: center;
 	justify-content: center;
@@ -54,6 +54,31 @@
 
 .center_container_cv { background: rgba( 0 0 0 / .3); z-index: 10 }
 .center_container canvas { z-index: 9 }
+.center_container_reps { z-index: 25 }
+
+.center_container_reps { text-align: center; }
+.center_container_reps h1,
+.center_container_reps h2 {
+
+	color: rgba(255 255 255 / .7);
+	font-size: 35vw;
+	text-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+}
+
+.center_container_reps button {
+	background:var(--reps-btn-bg);
+  color: var(--reps-btn-cl);
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 35px;
+}
+
+.center_container_reps h2 {
+	font-size: 8vw;
+}
 
 .panel {
 	height: 100vh;
@@ -74,8 +99,21 @@
 	width: 100vw;
 	height: 82px;
 	border-radius: 0 0 10px 10px;
-	background: rgba(140, 0, 0, 0.75);
+	background: rgba(140, 0, 0, 0.7);
 	display: flex;
 	padding: 20px;
 	z-index: 99;
 }
+
+.title {
+	width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.header svg {
+	color: rgba(255 255 255 / .8)
+}
+

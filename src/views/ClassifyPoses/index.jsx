@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
-import BurgerMenu from '../../components/BurgerMenu';
+import BurgerMenu from "../../components/BurgerMenu";
 import "@tensorflow/tfjs-backend-webgl";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
@@ -21,6 +21,8 @@ const ClassifyPoses = () => {
   let jsonRef = useRef(null);
   let binRef = useRef(null);
   let timerRef = useRef(null);
+  let [totalReps, setTotalReps] = useState(0);
+
   let [prediction, setPrediction] = useState(null);
 
   let [currentRep, setCurrentRep] = useState([
@@ -177,13 +179,21 @@ const ClassifyPoses = () => {
 
   return (
     <>
-
       {/* <Menu/> */}
       <div className={S.header}>
-      <BurgerMenu/>
-      <h1>{reps}</h1>
+        <BurgerMenu />
+        <div className={S.title}>
+          <h3>Curl de Biceps</h3>
+        </div>
       </div>
 
+      <div className={S.center_container_reps}>
+        <div>
+          <h1>{reps}</h1>
+          <h2>Quedan {totalReps - reps}</h2>
+          <button>TERMINAR</button>
+        </div>
+      </div>
       <div className={S.center_container_cv}>
         <canvas ref={canvasRef} />
       </div>
@@ -192,12 +202,17 @@ const ClassifyPoses = () => {
       </div>
 
       <div className={S.panel}>
-      <div>
-        <canvas height={50} width={120} ref={canvas2Ref} className={S.panel_canvas}/>
-        <div className={S.timer} ref={timerRef}>
-          <div className={posePrediction === 0 ? S.red : S.blue} />
+        <div>
+          <canvas
+            height={50}
+            width={120}
+            ref={canvas2Ref}
+            className={S.panel_canvas}
+          />
+          <div className={S.timer} ref={timerRef}>
+            <div className={posePrediction === 0 ? S.red : S.blue} />
+          </div>
         </div>
-      </div>
       </div>
 
       <h1>{reps}</h1>
