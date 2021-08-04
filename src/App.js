@@ -9,13 +9,9 @@ import Home from "./views/Home";
 import UserProfile from "./views/UserProfile";
 import Categories from "./views/Categories";
 import Tutorial from "./views/Tutorial";
-<<<<<<< HEAD
 // import Poses from "./views/Poses";
 import ClassifyPoses from "./views/ClassifyPoses";
-=======
-import Poses from "./views/Poses";
 import Iframe from "./views/Iframe";
->>>>>>> develop
 
 const App = () => {
   return (
