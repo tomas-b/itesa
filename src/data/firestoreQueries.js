@@ -34,7 +34,7 @@ export const addNewExercise = async (currentUser, currentExercise, reps) => {
       ],
     })
     .then(() => {
-      window.location = "/";
+      // window.location = "/";
     })
     .catch((error) => {
       console.error("Error writing document: ", error);

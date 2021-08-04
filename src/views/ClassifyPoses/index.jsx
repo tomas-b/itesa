@@ -5,6 +5,7 @@ import Webcam from "react-webcam";
 import "@tensorflow/tfjs-backend-webgl";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
+import { useHistory } from "react-router-dom";
 
 import { userState } from "../Home";
 import { currentExerciseState } from "../../data/currentExercise";
@@ -21,6 +22,7 @@ poseDetection
 let myModel = null;
 
 const ClassifyPoses = () => {
+  const history = useHistory();
   const { exerciseName } = useParams();
   const currentExercise = useRecoilValue(currentExerciseState);
   const currentUser = useRecoilValue(userState);
@@ -43,7 +45,15 @@ const ClassifyPoses = () => {
   useEffect(() => {
     let diff1 = currentRep[1] - currentRep[0];
     let diff2 = currentRep[2] - currentRep[1];
-    if (diff1 > 500 && diff2 > 1500 && poseRef.current === 0) setReps((r) => ++r);
+    if (diff1 > 500 && diff2 > 1000 && poseRef.current === 0) setReps((r) => {
+      if (totalReps - reps === 1) {
+        addNewExercise(currentUser, currentExercise, reps+1);
+        history.push('/perfil')
+        return r
+      } else {
+        return r+1;
+      }
+    });
   }, [currentRep]);
 
   useEffect(() => {
