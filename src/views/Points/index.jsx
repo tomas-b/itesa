@@ -4,7 +4,7 @@ import Arjs from "../../components/ArjsViewer";
 const Points = () => {
   return (
     <div>
-        <Arjs />
+      <Arjs />
     </div>
   );
 };

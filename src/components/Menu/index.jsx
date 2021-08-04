@@ -27,7 +27,8 @@ const Menu = () => {
     base.auth().signOut();
   };
 
-  let refresh = ["/points"].includes(useLocation().pathname);
+  // let refresh = ["/points", "/poses"].includes(useLocation().pathname);
+  let refresh = false;
 
   let linkClick = (url) => {
     if (refresh) window.location = url;
@@ -41,30 +42,16 @@ const Menu = () => {
         </div>
         <ul onClick={() => setShowMenu(false)}>
           <li>
-            <Link onClick={() => linkClick("/")} to={refresh ? "#" : "/"}>
-              INICIO
-            </Link>
+            <Link to={"/"}>INICIO</Link>
           </li>
           <li>
-            <Link onClick={() => linkClick("/")} to={refresh ? "#" : "/"}>
-              ENTRENAMIENTO
-            </Link>
+            <Link to={"/"}>ENTRENAMIENTO</Link>
           </li>
           <li>
-            <Link
-              onClick={() => linkClick("/points")}
-              to={refresh ? "#" : "/points"}
-            >
-              SUMÁ PUNTOS
-            </Link>
+            <Link to={"/points"}>SUMÁ PUNTOS</Link>
           </li>
           <li>
-            <Link
-              onClick={() => linkClick("/perfil")}
-              to={refresh ? "#" : "/perfil"}
-            >
-              MI PERFIL
-            </Link>
+            <Link to={"/perfil"}>MI PERFIL</Link>
           </li>
         </ul>
         <div className={S.logout_wrapper}>

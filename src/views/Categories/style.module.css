@@ -99,7 +99,7 @@
 
 /*******************/
 .grid_wrapper {
-  grid-template-rows: min-content min-content min-content 1fr;
+  grid-template-rows: min-content min-content min-content minmax(0, 1fr);
 }
 
 .carroussel {

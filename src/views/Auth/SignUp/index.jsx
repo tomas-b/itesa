@@ -36,6 +36,8 @@ const SingUp = () => {
             db.collection("users")
               .doc(user.uid)
               .set({
+                id: user.uid,
+                email: user.email,
                 gender: form.gender,
                 avatar: `https://picsum.photos/seed/${user.uid}/200/300`,
                 points: 0,
@@ -63,18 +65,15 @@ const SingUp = () => {
     if (e.target.type === "checkbox") value = e.target.checked;
     setForm({ ...form, [name]: value });
 
-    if (validator.isEmpty(value))
-      setMessage("Por favor completar todos los campos");
+    if (validator.isEmpty(value)) setMessage("Por favor completar todos los campos");
 
     switch (name) {
       case "name":
-        if (!validator.isAlpha(value))
-          setMessage("Por favor ingresa un nombre valido");
+        if (!validator.isAlpha(value)) setMessage("Por favor ingresa un nombre valido");
         else setMessage("");
         break;
       case "email":
-        if (!validator.isEmail(value))
-          setMessage("Por favor ingresa un email valido");
+        if (!validator.isEmail(value)) setMessage("Por favor ingresa un email valido");
         else setMessage("");
         break;
       case "password":
