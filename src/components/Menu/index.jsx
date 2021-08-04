@@ -41,30 +41,16 @@ const Menu = () => {
         </div>
         <ul onClick={() => setShowMenu(false)}>
           <li>
-            <Link onClick={() => linkClick("/")} to={refresh ? "#" : "/"}>
-              INICIO
-            </Link>
+            <Link to={"/"}>INICIO</Link>
           </li>
           <li>
-            <Link onClick={() => linkClick("/")} to={refresh ? "#" : "/"}>
-              ENTRENAMIENTO
-            </Link>
+            <Link to={"/"}>ENTRENAMIENTO</Link>
           </li>
           <li>
-            <Link
-              onClick={() => linkClick("/points")}
-              to={refresh ? "#" : "/points"}
-            >
-              SUMÁ PUNTOS
-            </Link>
+            <Link to={"/points"}>SUMÁ PUNTOS</Link>
           </li>
           <li>
-            <Link
-              onClick={() => linkClick("/perfil")}
-              to={refresh ? "#" : "/perfil"}
-            >
-              MI PERFIL
-            </Link>
+            <Link to={"/perfil"}>MI PERFIL</Link>
           </li>
         </ul>
         <div className={S.logout_wrapper}>
