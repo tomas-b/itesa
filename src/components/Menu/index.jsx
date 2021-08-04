@@ -27,7 +27,8 @@ const Menu = () => {
     base.auth().signOut();
   };
 
-  let refresh = ["/points", "/poses"].includes(useLocation().pathname);
+  // let refresh = ["/points", "/poses"].includes(useLocation().pathname);
+  let refresh = false;
 
   let linkClick = (url) => {
     if (refresh) window.location = url;

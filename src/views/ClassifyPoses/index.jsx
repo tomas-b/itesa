@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
+import BurgerMenu from '../../components/BurgerMenu';
 import "@tensorflow/tfjs-backend-webgl";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
+import S from "./styles.module.css";
 
 // poseDetection
 let detector = null;
-poseDetection.createDetector(
-  poseDetection.SupportedModels.MoveNet
-).then(d => detector = d);
+poseDetection
+  .createDetector(poseDetection.SupportedModels.MoveNet)
+  .then((d) => (detector = d));
 
 let myModel = null;
 
@@ -18,28 +20,55 @@ const ClassifyPoses = () => {
   let canvas2Ref = useRef(null);
   let jsonRef = useRef(null);
   let binRef = useRef(null);
+  let timerRef = useRef(null);
   let [prediction, setPrediction] = useState(null);
 
+  let [currentRep, setCurrentRep] = useState([
+    +new Date(),
+    +new Date(),
+    +new Date(),
+  ]);
+  let [posePrediction, setPosePrediction] = useState(0);
+  let [reps, setReps] = useState(0);
+  const poseRef = useRef(posePrediction);
+  poseRef.current = posePrediction;
 
   useEffect(() => {
-    let ctx, ctxW, ctxH, ctx2, lastResult=.5;
+    let diff1 = currentRep[1] - currentRep[0];
+    let diff2 = currentRep[2] - currentRep[1];
+    if (diff1 > 500 && diff2 > 1500 && poseRef.current === 0)
+      setReps((r) => ++r);
+  }, [currentRep]);
 
-		loadModel();
+  useEffect(() => {
+    setCurrentRep((moves) => moves.slice(1).concat([+new Date()]));
+  }, [posePrediction]);
+
+  useEffect(() => {
+    let ctx,
+      ctxW,
+      ctxH,
+      ctx2,
+      lastResult = 0.5;
+
+    loadModel();
 
     let loop = async () => {
-
-      let result = null
+      let result = null;
 
       try {
         const { keypoints } = (
           await detector.estimatePoses(webcamRef.current.video)
         )[0];
 
-
-        if( myModel !== null ) {
-          let _xs = keypoints.map( ({x, y}) => [x,y] ).flat()
-          let xs = tf.tensor2d([_xs])
-          result = myModel.predict(xs).dataSync()[0]
+        if (myModel !== null) {
+          let _xs = keypoints.map(({ x, y }) => [x, y]).flat();
+          let xs = tf.tensor2d([_xs]);
+          result = myModel.predict(xs).dataSync()[0];
+          if (Math.round(result) !== poseRef.current) {
+            console.log(result);
+            setPosePrediction(Math.round(result));
+          }
         }
 
         let { x: x1, y: y1, score: s1 } = keypoints[5];
@@ -52,7 +81,6 @@ const ClassifyPoses = () => {
         keypoints.push(head);
 
         draw(keypoints, ctx, result);
-
       } catch (e) {
         console.log(e);
       }
@@ -60,25 +88,25 @@ const ClassifyPoses = () => {
     };
 
     let draw = (keypoints, ctx, result) => {
-
-      let color = result === null ? "rgba(155,0,100,.7)" : `rgba(${255 * (1-result)},0,${255 * result},.7)`;
+      let color =
+        result === null
+          ? "rgba(155,0,100,.7)"
+          : `rgba(${255 * (1 - result)},0,${255 * result},.7)`;
 
       // little canvas
       ctx2.globalCompositeOperation = "copy";
-      ctx2.drawImage(ctx2.canvas,-4, 0);
-      ctx2.globalCompositeOperation = "source-over"
-      ctx2.fillStyle = "rgba(255,255,255,1)";
-      ctx2.fillRect(116, 0, 4, 50);
-      ctx2.fillStyle = result === null ? 'rgba(0,0,0,.3)' : color;
-      if(result === null) {
-        ctx2.fillRect(116, 23 , 4, 4 )
+      ctx2.drawImage(ctx2.canvas, -4, 0);
+      ctx2.globalCompositeOperation = "source-over";
+      ctx2.fillStyle = result === null ? "rgba(0,0,0,.3)" : color;
+      if (result === null) {
+        ctx2.fillRect(116, 23, 4, 4);
       } else {
-        ctx2.fillRect(116, 5 + ((40 * result) - 2) , 4, 4 )
+        ctx2.fillRect(116, 5 + (40 * result - 2), 4, 4);
       }
 
       ctx.clearRect(0, 0, ctxW, ctxH);
-      ctx.fillStyle = "rgba(0,0,0,.7)";
-      ctx.fillRect(0, 0, ctxW, ctxH);
+      // ctx.fillStyle = "rgba(0,0,0,.4)";
+      // ctx.fillRect(0, 0, ctxW, ctxH);
 
       let lines = [
         [4, 2],
@@ -139,22 +167,40 @@ const ClassifyPoses = () => {
       ctxH = height;
       ctx = canvasRef.current.getContext("2d");
       ctx2 = canvas2Ref.current.getContext("2d");
-      ctx2.fillStyle = 'rgba(255,255,255,.1)'
-      ctx2.fillRect(0,0,120,50)
       loop();
     });
-
   }, []);
 
   const loadModel = async () => {
-		myModel = await tf.loadLayersModel("/posesModels/manosR/manos.json");
-  }
+    myModel = await tf.loadLayersModel("/posesModels/curl/curl.json");
+  };
 
   return (
     <>
-      <canvas style={{ position: "absolute" }} ref={canvasRef} />
-      <canvas style={{ position: "absolute", margin: "5px" }} height={50} width={120} ref={canvas2Ref} />
-      <Webcam ref={webcamRef} />
+
+      {/* <Menu/> */}
+      <div className={S.header}>
+      <BurgerMenu/>
+      <h1>{reps}</h1>
+      </div>
+
+      <div className={S.center_container_cv}>
+        <canvas ref={canvasRef} />
+      </div>
+      <div className={S.center_container}>
+        <Webcam ref={webcamRef} />
+      </div>
+
+      <div className={S.panel}>
+      <div>
+        <canvas height={50} width={120} ref={canvas2Ref} className={S.panel_canvas}/>
+        <div className={S.timer} ref={timerRef}>
+          <div className={posePrediction === 0 ? S.red : S.blue} />
+        </div>
+      </div>
+      </div>
+
+      <h1>{reps}</h1>
     </>
   );
 };
