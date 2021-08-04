@@ -8,10 +8,14 @@ import LogIn from "./views/Auth/LogIn";
 import Home from "./views/Home";
 import UserProfile from "./views/UserProfile";
 import Categories from "./views/Categories";
-import Points from "./views/Points";
 import Tutorial from "./views/Tutorial";
+<<<<<<< HEAD
 // import Poses from "./views/Poses";
 import ClassifyPoses from "./views/ClassifyPoses";
+=======
+import Poses from "./views/Poses";
+import Iframe from "./views/Iframe";
+>>>>>>> develop
 
 const App = () => {
   return (
@@ -23,9 +27,9 @@ const App = () => {
           <Route exact path="/singup" component={SingUp} />
           <PrivateRoute exact path="/perfil" component={UserProfile} />
           <PrivateRoute path="/categories/:name" component={Categories} />
-          <PrivateRoute path="/points" component={Points} />
           <PrivateRoute path="/tutorial" component={Tutorial} />
           <PrivateRoute path="/poses/:exerciseName" component={ClassifyPoses} />
+          <PrivateRoute path="/points" component={Iframe} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>
