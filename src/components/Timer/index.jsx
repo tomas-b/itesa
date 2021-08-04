@@ -16,12 +16,13 @@ const debounce = (fn, timeout = 100) => {
 
 const Timer = ({ show }) => {
   const currentExercise = useRecoilValue(currentExerciseState);
+  const currentExerciseName = currentExercise.name.replace(/\s/g, "").toLocaleLowerCase();
   return (
     show && (
       <div className={S.timer_wrapper}>
         <h3>Cuántas repeticiones?</h3>
         <Dial />
-        <Link to={`/poses`}>
+        <Link to={`/poses/${currentExerciseName}`}>
           <button>Empezar</button>
         </Link>
       </div>

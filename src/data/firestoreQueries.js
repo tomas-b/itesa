@@ -24,7 +24,7 @@ export const getUser = async (userId) => {
 };
 
 export const addNewExercise = async (currentUser, currentExercise, reps) => {
-  console.log("adding new exercise", currentExercise);
+  console.log("adding new exercise", currentUser);
   db.collection("users")
     .doc(currentUser.id)
     .update({

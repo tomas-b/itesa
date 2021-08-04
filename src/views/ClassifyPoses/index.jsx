@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Webcam from "react-webcam";
 import "@tensorflow/tfjs-backend-webgl";
 import * as poseDetection from "@tensorflow-models/pose-detection";
@@ -21,6 +21,7 @@ poseDetection
 let myModel = null;
 
 const ClassifyPoses = () => {
+  const { exerciseName } = useParams();
   const currentExercise = useRecoilValue(currentExerciseState);
   const currentUser = useRecoilValue(userState);
   let webcamRef = useRef(null);
@@ -176,7 +177,10 @@ const ClassifyPoses = () => {
   }, []);
 
   const loadModel = async () => {
-    myModel = await tf.loadLayersModel("/posesModels/curl/curl.json");
+    // myModel = await tf.loadLayersModel(`/posesModels/curldebiceps/curldebiceps.json`);
+    myModel = await tf.loadLayersModel(
+      `/posesModels/${exerciseName}/${exerciseName}.json`
+    );
   };
 
   const onStop = async () => {
@@ -195,20 +199,11 @@ const ClassifyPoses = () => {
 
       <div className={S.center_container_reps}>
         <div>
-          {reps <= 0 ? (
-            <div>
-              <h1>{reps}</h1>
-              <h2>Quedan {totalReps - reps}</h2>
-              <button onClick={onStop}>TERMINAR</button>
-            </div>
-          ) : (
-            <div>
-              <h2>Terminaste!</h2>
-              <Link to="/perfil">
-                <button>Ver detalle</button>
-              </Link>
-            </div>
-          )}
+          <h1>{reps}</h1>
+          <h2>Quedan {totalReps - reps}</h2>
+          <Link to="/perfil">
+            <button onClick={onStop}>TERMINAR</button>
+          </Link>
         </div>
       </div>
       <div className={S.center_container_cv}>
