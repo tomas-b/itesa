@@ -48,7 +48,7 @@ const ClassifyPoses = () => {
     if (diff1 > 500 && diff2 > 1000 && poseRef.current === 0) setReps((r) => {
       if (totalReps - reps === 1) {
         addNewExercise(currentUser, currentExercise, reps+1);
-        history.push('/perfil')
+        history.push('/')
         return r
       } else {
         return r+1;
@@ -211,7 +211,7 @@ const ClassifyPoses = () => {
         <div>
           <h1>{reps}</h1>
           <h2>Quedan {totalReps - reps}</h2>
-          <Link to="/perfil">
+          <Link to="/">
             <button onClick={onStop}>TERMINAR</button>
           </Link>
         </div>
