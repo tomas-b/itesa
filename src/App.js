@@ -25,7 +25,7 @@ const App = () => {
           <PrivateRoute path="/categories/:name" component={Categories} />
           <PrivateRoute path="/points" component={Points} />
           <PrivateRoute path="/tutorial" component={Tutorial} />
-          <PrivateRoute path="/poses/:name" component={ClassifyPoses} />
+          <PrivateRoute path="/poses/" component={ClassifyPoses} />
         </BrowserRouter>
       </AuthProvider>
     </RecoilRoot>

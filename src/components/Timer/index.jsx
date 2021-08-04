@@ -21,7 +21,7 @@ const Timer = ({ show }) => {
       <div className={S.timer_wrapper}>
         <h3>Cuántas repeticiones?</h3>
         <Dial />
-        <Link to={`/poses/${currentExercise.name.toLocaleLowerCase()}`}>
+        <Link to={`/poses`}>
           <button>Empezar</button>
         </Link>
       </div>
