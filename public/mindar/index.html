@@ -13,7 +13,6 @@
   />
 
   <script>
-
     document.addEventListener("DOMContentLoaded", function () {
 
       const userId = window.location.hash.split("id:")[1]
@@ -40,7 +39,7 @@
                 let p = document.getElementById("encontrar")
                 if (arr.includes(productoSingular.name)) {
                   puntos = 0
-                  p.textContent = `Este producto ya fue escaneado , proba con otro!`
+                  p.textContent = `Este producto ${productoSingular.name} ya fue escaneado , proba con otro!`
                 } else {
                   arr.push(productoSingular.name)
                   let productos = arr.toString()
@@ -102,7 +101,7 @@
     <p id ="encontrar" style="color: white;">¡Escanea un Producto Para Sumar Puntos!</p>
   </div>
 
-  <a-scene mindar="imageTargetSrc: /mindar/productos2.mind; showStats: false;" color-space="sRGB"
+  <a-scene mindar="imageTargetSrc: /mindar/productos3.mind; showStats: false;" color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
     <a-assets>
@@ -111,11 +110,11 @@
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <a-entity id="cocacola" mindar-image-target="targetIndex: 1">
+    <a-entity id="gatorade" mindar-image-target="targetIndex: 0">
       <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.003 0.003 0.003" src="#avatarModel"
         animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
     </a-entity>
-    <a-entity id="gatorade" mindar-image-target="targetIndex: 0">
+    <a-entity id="cocacola" mindar-image-target="targetIndex: 1">
       <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.003 0.003 0.003" src="#avatarModel"
         animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
     </a-entity>
