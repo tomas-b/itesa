@@ -152,28 +152,18 @@ const Poses = () => {
     }
   };
 
-  let exerciseFinished = {};
-
   let finished = () => {
-    counterRef.current.style.opacity = "0";
-    if (reps == 0) {
-      window.location = "/";
-      return;
-    }
-    db.collection("users")
-      .doc(currentUser.id)
-      .update({
-        ejerciciosRealizados: [
-          ...currentUser.ejerciciosRealizados,
-          { name: currentExercise.name, reps: reps, date: +new Date() },
-        ],
-      })
-      .then(() => {
-        window.location = "/";
-      })
-      .catch((error) => {
-        console.error("Error writing document: ", error);
-      });
+    counterRef.current.style.opacity = '0';
+    if (reps === 0) {window.location="/"; return}
+    db.collection("users").doc(currentUser.id).update({
+      ejerciciosRealizados: [...currentUser.ejerciciosRealizados, {name: currentExercise.name, reps: reps, date: (+new Date())}],
+  })
+  .then(() => {
+      window.location="/";
+  })
+  .catch((error) => {
+      console.error("Error writing document: ", error);
+  });
   };
 
   let startTimer = () => {

@@ -129,7 +129,7 @@ const Classify = () => {
 
   const loadModel = async () => {
     // let json = jsonRef.current.files[0];
-    // let bin = binRef.current.files[0];
+    // let bin = binRef.current.files[0]
     // myModel = await tf.loadLayersModel("/posesModels/Prueba/prueba.json");
     myModel = await tf.loadLayersModel("/posesModels/manos/manos.json");
   };
